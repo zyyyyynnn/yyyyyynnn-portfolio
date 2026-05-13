@@ -473,15 +473,15 @@ img {
 .retro-screen::before {
   z-index: 3;
   background:
-    linear-gradient(rgba(233, 246, 213, 0.035), rgba(233, 246, 213, 0)),
-    repeating-linear-gradient(0deg, rgba(245, 255, 228, 0.08) 0 1px, transparent 1px 4px);
+    linear-gradient(rgba(238, 231, 213, 0.028), rgba(238, 231, 213, 0)),
+    repeating-linear-gradient(0deg, rgba(241, 233, 213, 0.06) 0 1px, transparent 1px 4px);
   mix-blend-mode: screen;
 }
 
 .retro-screen::after {
   z-index: 1;
-  background: radial-gradient(circle at 50% 48%, rgba(221, 247, 189, 0.2), transparent 68%);
-  filter: blur(4px);
+  background: radial-gradient(circle at 50% 48%, rgba(238, 229, 208, 0.16), transparent 68%);
+  filter: blur(3px);
 }
 
 .retro-screen.screen-live {
@@ -945,13 +945,6 @@ img {
   border: 1px solid rgba(69, 109, 164, 0.14);
 }
 
-.project-note {
-  max-width: 260px;
-  margin: 12px 0 0 18px;
-  opacity: 0.82;
-  font-size: 14px;
-}
-
 .image-fallback {
   display: grid;
   place-items: center;
@@ -1207,6 +1200,462 @@ img {
   margin-top: 30px;
 }
 
+/* Second visual pass: archive desktop composition, generated paper details, and smoother motion. */
+.site-shell {
+  background-attachment: scroll;
+}
+
+.terminal-cover {
+  background:
+    radial-gradient(circle at 70% 18%, rgba(244, 237, 223, 0.12), transparent 30%),
+    radial-gradient(circle at 28% 24%, rgba(76, 58, 40, 0.26), transparent 42%),
+    linear-gradient(135deg, rgba(7, 7, 6, 0.96), rgba(20, 18, 15, 0.92));
+}
+
+.terminal-cover.preparing-dock,
+.terminal-cover.docking,
+.terminal-cover.absorbing {
+  background:
+    radial-gradient(circle at 58% 42%, rgba(244, 236, 218, 0.09), transparent 24%),
+    rgba(244, 237, 223, 0.18);
+  backdrop-filter: blur(2px);
+  pointer-events: none;
+}
+
+.terminal-cover.preparing-dock::after,
+.terminal-cover.docking::after,
+.terminal-cover.absorbing::after {
+  opacity: 0.025;
+}
+
+.terminal-cover.preparing-dock .skip,
+.terminal-cover.docking .skip,
+.terminal-cover.absorbing .skip {
+  opacity: 0;
+}
+
+.terminal-window {
+  border-radius: 16px;
+  border-color: rgba(250, 242, 221, 0.2);
+  color: rgba(239, 235, 218, 0.86);
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent 16%),
+    linear-gradient(135deg, rgba(9, 10, 9, 0.94), rgba(24, 23, 20, 0.96)),
+    url("/assets/generated-ui/terminal-window-noise.png");
+  background-size: auto, auto, cover;
+  box-shadow:
+    0 26px 78px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 1px 0 rgba(255, 255, 255, 0.1) inset,
+    inset 0 -34px 70px rgba(0, 0, 0, 0.28);
+}
+
+.terminal-titlebar {
+  height: 44px;
+  border-bottom-color: rgba(244, 234, 210, 0.13);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.025)),
+    rgba(29, 28, 25, 0.78);
+}
+
+.terminal-controls span {
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.22),
+    0 0 0 1px rgba(0, 0, 0, 0.28);
+}
+
+.terminal-title {
+  color: rgba(251, 246, 235, 0.56);
+}
+
+.terminal-lines {
+  color: rgba(239, 235, 218, 0.84);
+  font-size: clamp(13px, 1.22vw, 17px);
+  line-height: 1.72;
+  text-shadow: 0 0 6px rgba(244, 236, 218, 0.06);
+}
+
+.terminal-line {
+  color: rgba(239, 235, 218, 0.84);
+}
+
+.terminal-line:nth-child(n + 2) {
+  color: rgba(203, 194, 172, 0.78);
+}
+
+.cursor {
+  background: rgba(235, 226, 204, 0.72);
+}
+
+.hero-section::before {
+  content: "";
+  width: min(520px, 44vw);
+  aspect-ratio: 1.14;
+  position: absolute;
+  right: 6%;
+  top: 13%;
+  z-index: -1;
+  opacity: 0.5;
+  transform: rotate(4deg);
+  background: url("/assets/generated-ui/hero-paper-desk-layer.png") center / contain no-repeat;
+  filter: drop-shadow(0 18px 28px rgba(49, 38, 26, 0.08));
+}
+
+.hero-copy {
+  position: relative;
+}
+
+.hero-copy::after {
+  display: none;
+}
+
+.kraft-slab {
+  background-image:
+    linear-gradient(rgba(111, 89, 67, 0.1), rgba(111, 89, 67, 0.1)),
+    url("/assets/generated-ui/hero-paper-desk-layer.png"),
+    url("/assets/textures/kraft-clean.jpg");
+  background-size: cover, cover, 560px auto;
+}
+
+.computer-shadow-plate {
+  display: none;
+}
+
+.retro-screen.screen-active {
+  background:
+    linear-gradient(rgba(245, 239, 226, 0.028), rgba(245, 239, 226, 0)),
+    repeating-linear-gradient(0deg, rgba(245, 239, 226, 0.035) 0 1px, transparent 1px 4px);
+}
+
+.retro-screen.screen-active::before {
+  opacity: 0.48;
+}
+
+.retro-screen.screen-active::after {
+  opacity: 0.22;
+  background: radial-gradient(circle at 50% 48%, rgba(245, 235, 213, 0.18), transparent 70%);
+}
+
+.retro-screen.screen-live::after {
+  opacity: 0.24;
+}
+
+.computer-note,
+.hero-note,
+.header-note,
+.board-note,
+.feature-note,
+.about-note,
+.contact-card .hand-note {
+  font-family: "Segoe Print", "Bradley Hand ITC", cursive;
+}
+
+.project-scroll-shell {
+  height: 190vh;
+  background-image:
+    linear-gradient(rgba(102, 78, 52, 0.34), rgba(102, 78, 52, 0.16)),
+    url("/assets/textures/kraft-clean.jpg");
+  background-size: auto, 640px auto;
+  background-repeat: repeat, repeat;
+  background-position: center;
+}
+
+.project-scroll-stage {
+  grid-template-columns: minmax(220px, 270px) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 72px);
+}
+
+.project-index-panel {
+  border-radius: 3px;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.26), transparent),
+    rgba(246, 238, 222, 0.72);
+}
+
+.project-card-stage {
+  height: min(610px, calc(100vh - 110px));
+  min-height: 480px;
+}
+
+.project-scroll-card {
+  overflow: visible;
+  padding: clamp(28px, 3.8vw, 52px);
+  transform-origin: 48% 70%;
+  will-change: transform, opacity;
+  transition: box-shadow 0.28s ease;
+}
+
+.project-scroll-card.active {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.46) inset,
+    0 22px 42px rgba(49, 38, 26, 0.16);
+}
+
+.project-scroll-card:not(.active) .project-scroll-copy,
+.project-scroll-card:not(.active) .project-visual-wrap {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.project-scroll-card::after {
+  width: 102px;
+  height: 102px;
+  top: 52px;
+  right: 34px;
+  padding: 0;
+  color: transparent;
+  border: 0;
+  background: url("/assets/generated-ui/archived-stamp-red.png") center / contain no-repeat;
+}
+
+.project-folder-base {
+  display: none;
+}
+
+.folder-tab {
+  width: 174px;
+  height: 58px;
+  top: -34px;
+  left: 42px;
+  border: 0;
+  background: url("/assets/generated-ui/folder-tab-archive.png") center / contain no-repeat;
+}
+
+.project-visual-wrap::before,
+.photo-tape,
+.photo-corner,
+.polaroid:nth-child(2n)::after,
+.about-card::after,
+.contact-card::after {
+  background: url("/assets/generated-ui/polaroid-tape-set.png") center / cover no-repeat;
+}
+
+.project-scroll-copy {
+  width: min(60%, 650px);
+}
+
+.photo-desk {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.35fr);
+  gap: clamp(24px, 4vw, 52px);
+  align-items: center;
+}
+
+.photo-desk[data-reveal] {
+  filter: none;
+}
+
+.photo-feature {
+  position: relative;
+  padding: 18px 18px 54px;
+  transform: rotate(-2deg);
+  border: 1px solid var(--line-paper);
+  background: #f5efe3;
+  box-shadow: 0 16px 30px rgba(49, 38, 26, 0.12);
+  contain: layout paint;
+}
+
+.photo-feature::before {
+  content: "";
+  width: 96px;
+  height: 28px;
+  position: absolute;
+  top: -15px;
+  left: 32%;
+  background: url("/assets/generated-ui/polaroid-tape-set.png") center / cover no-repeat;
+}
+
+.photo-feature-img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  display: block;
+  object-fit: cover;
+  overflow: hidden;
+  border: 1px solid rgba(22, 18, 15, 0.12);
+}
+
+.feature-note {
+  position: absolute;
+  right: 20px;
+  bottom: 16px;
+  margin: 0;
+}
+
+.photo-board {
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 16px;
+  padding: clamp(20px, 3vw, 34px);
+  content-visibility: visible;
+}
+
+.polaroid {
+  contain: layout paint;
+  filter: drop-shadow(0 8px 14px rgba(49, 38, 26, 0.11));
+}
+
+.polaroid img,
+.polaroid .image-fallback {
+  aspect-ratio: 4 / 3.15;
+  object-fit: cover;
+  background: var(--paper-aged);
+}
+
+.polaroid:nth-child(1) {
+  grid-column: 1 / span 4;
+  margin-top: 24px;
+}
+
+.polaroid:nth-child(2) {
+  grid-column: 5 / span 6;
+  margin-top: 0;
+}
+
+.polaroid:nth-child(3) {
+  grid-column: 2 / span 4;
+  margin-top: 2px;
+}
+
+.polaroid:nth-child(4) {
+  grid-column: 6 / span 4;
+  margin-top: 34px;
+}
+
+.polaroid:nth-child(5) {
+  grid-column: 1 / span 5;
+  margin-top: -4px;
+}
+
+.polaroid:nth-child(6) {
+  grid-column: 6 / span 5;
+  margin-top: 20px;
+}
+
+.polaroid:nth-child(7) {
+  grid-column: 2 / span 4;
+  margin-top: 14px;
+}
+
+.polaroid:nth-child(8) {
+  grid-column: 6 / span 4;
+  margin-top: -10px;
+}
+
+.board-note {
+  right: 24px;
+  bottom: 14px;
+}
+
+.about-section {
+  display: block;
+}
+
+.about-dossier {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.75fr) minmax(0, 1.25fr);
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+
+.portrait-frame {
+  position: relative;
+  padding: 16px 16px 58px;
+  transform: rotate(-2deg);
+  border: 1px solid var(--line-paper);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.18), transparent),
+    var(--paper-card);
+  box-shadow: 0 18px 34px rgba(49, 38, 26, 0.12);
+}
+
+.portrait-frame::before {
+  content: "";
+  position: absolute;
+  inset: 12px;
+  opacity: 0.28;
+  background: url("/assets/generated-ui/about-portrait-placeholder.png") center / contain no-repeat;
+  pointer-events: none;
+}
+
+.portrait-img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  display: block;
+  object-fit: cover;
+  border: 1px solid rgba(22, 18, 15, 0.12);
+  background: rgba(229, 213, 183, 0.72);
+}
+
+.portrait-frame .image-fallback {
+  aspect-ratio: 4 / 5;
+}
+
+.portrait-tape {
+  width: 92px;
+  height: 30px;
+  position: absolute;
+  top: -14px;
+  left: 22px;
+  z-index: 2;
+  transform: rotate(-12deg);
+  background: url("/assets/generated-ui/polaroid-tape-set.png") center / cover no-repeat;
+}
+
+.portrait-meta {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 18px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.about-card {
+  min-height: 410px;
+}
+
+.about-note {
+  margin-top: 26px;
+}
+
+.contact-section {
+  grid-template-columns: minmax(0, 1.05fr) minmax(250px, 0.95fr);
+}
+
+.contact-card {
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.24), transparent 18%),
+    repeating-linear-gradient(0deg, transparent 0 48px, rgba(92, 72, 48, 0.12) 49px 50px),
+    radial-gradient(circle at 22% 92%, rgba(111, 89, 67, 0.07), transparent 30%),
+    linear-gradient(var(--paper-card), var(--paper-card));
+  background-size: auto;
+  background-repeat: repeat;
+  background-position: center;
+}
+
+.copied-stamp {
+  position: absolute;
+  top: 76px;
+  right: 34px;
+  z-index: 3;
+  padding: 7px 11px;
+  color: rgba(126, 27, 34, 0.86);
+  border: 1px solid rgba(126, 27, 34, 0.52);
+  border-radius: 50%;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  transform: rotate(-9deg);
+}
+
+.copy-row button:active {
+  transform: translateY(1px) scale(0.985);
+}
+
 .site-footer {
   position: relative;
   z-index: 2;
@@ -1233,6 +1682,11 @@ img {
 
   .about-section,
   .contact-section {
+    grid-template-columns: 1fr;
+  }
+
+  .about-dossier,
+  .photo-desk {
     grid-template-columns: 1fr;
   }
 
@@ -1298,6 +1752,7 @@ img {
     opacity: 1 !important;
     filter: none !important;
     transform: none !important;
+    visibility: visible !important;
   }
 
   .project-card-stage {
@@ -1318,8 +1773,9 @@ img {
   }
 
   .photo-board {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 22px;
+    content-visibility: visible;
   }
 
   .polaroid,
@@ -1356,7 +1812,7 @@ img {
 
   .terminal-window {
     width: 92vw;
-    min-height: 74vh;
+    min-height: 68vh;
   }
 
   .terminal-lines {
@@ -1377,7 +1833,16 @@ img {
   }
 
   .photo-board {
+    grid-template-columns: 1fr;
     padding: 22px;
+  }
+
+  .photo-feature {
+    transform: rotate(-1deg);
+  }
+
+  .portrait-frame {
+    transform: rotate(-1deg);
   }
 
   .about-card,
@@ -1402,6 +1867,7 @@ img {
 
   [data-reveal] {
     opacity: 1;
+    filter: none;
     transform: none;
   }
 

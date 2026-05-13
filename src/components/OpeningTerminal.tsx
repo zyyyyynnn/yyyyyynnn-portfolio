@@ -24,7 +24,7 @@ export function OpeningTerminal({ targetRef, phase, setPhase }: OpeningTerminalP
       return
     }
 
-    const timer = window.setTimeout(startDocking, 3550)
+    const timer = window.setTimeout(startDocking, 3350)
 
     return () => {
       window.clearTimeout(timer)
@@ -48,7 +48,14 @@ export function OpeningTerminal({ targetRef, phase, setPhase }: OpeningTerminalP
       <div
         ref={terminalRef}
         className="terminal-window"
-        style={phase === 'docking' || phase === 'docked' ? dockStyle : undefined}
+        style={
+          phase === 'preparing-dock' ||
+          phase === 'docking' ||
+          phase === 'absorbing' ||
+          phase === 'docked'
+            ? dockStyle
+            : undefined
+        }
       >
         <div className="terminal-titlebar">
           <div className="terminal-controls" aria-hidden="true">

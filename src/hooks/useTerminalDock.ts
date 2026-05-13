@@ -15,7 +15,7 @@ type UseTerminalDockOptions = {
 }
 
 export function useTerminalDock({ terminalRef, targetRef, setPhase }: UseTerminalDockOptions) {
-  const timeoutRef = useRef<number | null>(null)
+  const timeoutRefs = useRef<number[]>([])
   const animationRef = useRef<Animation | null>(null)
   const [dockStyle, setDockStyle] = useState<DockStyle>({
     '--dock-x': '0px',
@@ -24,10 +24,8 @@ export function useTerminalDock({ terminalRef, targetRef, setPhase }: UseTermina
   })
 
   const clearDockTimer = useCallback(() => {
-    if (timeoutRef.current !== null) {
-      window.clearTimeout(timeoutRef.current)
-      timeoutRef.current = null
-    }
+    timeoutRefs.current.forEach((timer) => window.clearTimeout(timer))
+    timeoutRefs.current = []
     if (animationRef.current) {
       animationRef.current.cancel()
       animationRef.current = null
@@ -47,8 +45,8 @@ export function useTerminalDock({ terminalRef, targetRef, setPhase }: UseTermina
     const targetRect = targetElement.getBoundingClientRect()
 
     const scale = Math.min(
-      (targetRect.width * 0.86) / terminalRect.width,
-      (targetRect.height * 0.76) / terminalRect.height,
+      (targetRect.width * 0.94) / terminalRect.width,
+      (targetRect.height * 0.88) / terminalRect.height,
     )
     const terminalCenterX = terminalRect.left + terminalRect.width / 2
     const terminalCenterY = terminalRect.top + terminalRect.height / 2
@@ -57,6 +55,7 @@ export function useTerminalDock({ terminalRef, targetRef, setPhase }: UseTermina
     const translateX = targetCenterX - terminalCenterX
     const translateY = targetCenterY - terminalCenterY
     const finalTransform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`
+    const overshootTransform = `translate3d(${translateX * 0.96}px, ${translateY * 0.96}px, 0) scale(${scale * 1.06})`
 
     setDockStyle({
       '--dock-x': `${translateX}px`,
@@ -67,57 +66,85 @@ export function useTerminalDock({ terminalRef, targetRef, setPhase }: UseTermina
     terminalElement.style.transform = 'translate3d(0, 0, 0) scale(1)'
     terminalElement.style.opacity = '1'
     terminalElement.style.filter = 'blur(0)'
-    setPhase('docking')
+    terminalElement.style.clipPath = 'inset(0% round 18px)'
+    terminalElement.style.borderRadius = '18px'
+    setPhase('preparing-dock')
 
-    animationRef.current = terminalElement.animate(
-      [
+    const dockTimer = window.setTimeout(() => {
+      setPhase('docking')
+      animationRef.current = terminalElement.animate(
+        [
+          {
+            transform: 'translate3d(0, 0, 0) scale(1)',
+            opacity: 1,
+            filter: 'blur(0) brightness(1)',
+            clipPath: 'inset(0% round 18px)',
+            borderRadius: '18px',
+            offset: 0,
+          },
+          {
+            transform: `translate3d(${translateX * 0.08}px, ${translateY * 0.08}px, 0) scale(0.985)`,
+            opacity: 1,
+            filter: 'blur(0) brightness(1.03)',
+            clipPath: 'inset(0% round 18px)',
+            borderRadius: '18px',
+            offset: 0.16,
+          },
+          {
+            transform: `translate3d(${translateX * 0.62}px, ${translateY * 0.62}px, 0) scale(${0.42 + scale * 0.58})`,
+            opacity: 0.98,
+            filter: 'blur(0.18px) brightness(1.05)',
+            clipPath: 'inset(0% round 15px)',
+            borderRadius: '15px',
+            offset: 0.62,
+          },
+          {
+            transform: overshootTransform,
+            opacity: 0.9,
+            filter: 'blur(0.28px) brightness(1.08)',
+            clipPath: 'inset(2% 4% round 11px)',
+            borderRadius: '11px',
+            offset: 0.82,
+          },
+          {
+            transform: finalTransform,
+            opacity: 0.64,
+            filter: 'blur(0.48px) brightness(1.1)',
+            clipPath: 'inset(12% 18% round 9px)',
+            borderRadius: '9px',
+            offset: 0.94,
+          },
+          {
+            transform: finalTransform,
+            opacity: 0.36,
+            filter: 'blur(0.7px) brightness(1.12)',
+            clipPath: 'inset(31% 38% round 9px)',
+            borderRadius: '9px',
+            offset: 1,
+          },
+        ],
         {
-          transform: 'translate3d(0, 0, 0) scale(1)',
-          opacity: 1,
-          filter: 'blur(0)',
-          offset: 0,
+          duration: 1420,
+          easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
+          fill: 'forwards',
         },
-        {
-          transform: `translate3d(${translateX * 0.2}px, ${translateY * 0.2}px, 0) scale(${0.86 + scale * 0.14})`,
-          opacity: 1,
-          filter: 'blur(0)',
-          offset: 0.18,
-        },
-        {
-          transform: `translate3d(${translateX * 0.72}px, ${translateY * 0.72}px, 0) scale(${0.34 + scale * 0.66})`,
-          opacity: 0.76,
-          filter: 'blur(0.35px)',
-          offset: 0.58,
-        },
-        {
-          transform: finalTransform,
-          opacity: 0.12,
-          filter: 'blur(0.9px)',
-          offset: 0.86,
-        },
-        {
-          transform: finalTransform,
-          opacity: 0,
-          filter: 'blur(1.2px)',
-          offset: 1,
-        },
-      ],
-      {
-        duration: 1320,
-        easing: 'cubic-bezier(0.77, 0, 0.175, 1)',
-        fill: 'forwards',
-      },
-    )
+      )
 
-    animationRef.current.finished
-      .then(() => {
-        terminalElement.style.transform = finalTransform
-        terminalElement.style.opacity = '0'
-        terminalElement.style.filter = 'blur(1.2px)'
-        setPhase('docked')
-      })
-      .catch(() => undefined)
-    timeoutRef.current = window.setTimeout(() => setPhase('docked'), 1480)
+      const absorbTimer = window.setTimeout(() => setPhase('absorbing'), 1120)
+      timeoutRefs.current.push(absorbTimer)
+      animationRef.current.finished
+        .then(() => {
+          terminalElement.style.transform = finalTransform
+          terminalElement.style.opacity = '0.32'
+          terminalElement.style.filter = 'blur(0.7px) brightness(1.12)'
+          terminalElement.style.clipPath = 'inset(31% 38% round 9px)'
+          setPhase('docked')
+        })
+        .catch(() => undefined)
+      const doneTimer = window.setTimeout(() => setPhase('docked'), 1660)
+      timeoutRefs.current.push(doneTimer)
+    }, 180)
+    timeoutRefs.current.push(dockTimer)
   }, [clearDockTimer, setPhase, targetRef, terminalRef])
 
   return { dockStyle, startDocking, clearDockTimer }

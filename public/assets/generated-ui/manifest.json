@@ -1,6 +1,67 @@
 {
-  "generatedAt": "2026-05-12T10:39:30.4465203Z",
-  "model": "not-executed; prompts provided for gpt-image-2",
-  "assets": [],
-  "promptsDocument": "docs/generated-ui-prompts.md"
+  "generatedAt": "2026-05-13T14:41:59.208517+08:00",
+  "model": "gpt-image-2 via built-in image generation",
+  "source": "C:\\Users\\ZYN\\.codex\\generated_images\\019e1b06-e748-7832-8aee-b3eed047a259\\ig_0bc62a68a1aec6fb016a041c51e59c8191853a902fd81a41a6.png",
+  "assets": [
+    {
+      "file": "mac-terminal-frame-overlay.png",
+      "usage": "Opening terminal window texture/detail",
+      "prompt": "Generated from a GPT Image asset atlas: beige paper archive UI cutout, transparent after chroma-key removal, avoid animal subjects, no animals, no Chinese text, no logos."
+    },
+    {
+      "file": "terminal-window-noise.png",
+      "usage": "Opening terminal dark material texture",
+      "prompt": "Generated from a GPT Image asset atlas: beige paper archive UI cutout, transparent after chroma-key removal, avoid animal subjects, no animals, no Chinese text, no logos."
+    },
+    {
+      "file": "terminal-dock-glow.png",
+      "usage": "Generated but not mounted after green glow cleanup; CSS warm-gray screen feedback is used instead",
+      "prompt": "Generated from a GPT Image asset atlas: beige paper archive UI cutout, transparent after chroma-key removal, avoid animal subjects, no animals, no Chinese text, no logos."
+    },
+    {
+      "file": "hero-paper-desk-layer.png",
+      "usage": "Hero paper desk torn layer",
+      "prompt": "Generated from a GPT Image asset atlas: beige paper archive UI cutout, transparent after chroma-key removal, avoid animal subjects, no animals, no Chinese text, no logos."
+    },
+    {
+      "file": "folder-stack-base.png",
+      "usage": "Generated but not mounted after visual cleanup; CSS paper stack is used instead",
+      "prompt": "Generated from a GPT Image asset atlas: beige paper archive UI cutout, transparent after chroma-key removal, avoid animal subjects, no animals, no Chinese text, no logos."
+    },
+    {
+      "file": "folder-tab-archive.png",
+      "usage": "Projects folder tab",
+      "prompt": "Generated from a GPT Image asset atlas: beige paper archive UI cutout, transparent after chroma-key removal, avoid animal subjects, no animals, no Chinese text, no logos."
+    },
+    {
+      "file": "archived-stamp-red.png",
+      "usage": "Projects archived stamp",
+      "prompt": "Generated from a GPT Image asset atlas: beige paper archive UI cutout, transparent after chroma-key removal, avoid animal subjects, no animals, no Chinese text, no logos."
+    },
+    {
+      "file": "polaroid-tape-set.png",
+      "usage": "Photos and dossier masking tape pieces",
+      "prompt": "Generated from a GPT Image asset atlas: beige paper archive UI cutout, transparent after chroma-key removal, avoid animal subjects, no animals, no Chinese text, no logos."
+    },
+    {
+      "file": "blue-annotation-arrows.png",
+      "usage": "Blue ink annotation arrows and marks",
+      "prompt": "Generated from a GPT Image asset atlas: beige paper archive UI cutout, transparent after chroma-key removal, avoid animal subjects, no animals, no Chinese text, no logos."
+    },
+    {
+      "file": "about-portrait-placeholder.png",
+      "usage": "About 4:5 portrait placeholder",
+      "prompt": "Generated from a GPT Image asset atlas: beige paper archive UI cutout, transparent after chroma-key removal, avoid animal subjects, no animals, no Chinese text, no logos."
+    },
+    {
+      "file": "contact-receipt-paper.png",
+      "usage": "Generated but not mounted after visual cleanup; CSS receipt paper is used instead",
+      "prompt": "Generated from a GPT Image asset atlas: beige paper archive UI cutout, transparent after chroma-key removal, avoid animal subjects, no animals, no Chinese text, no logos."
+    },
+    {
+      "file": "paper-shadow-soft.png",
+      "usage": "Generated but not mounted after green shadow cleanup",
+      "prompt": "Generated from a GPT Image asset atlas: beige paper archive UI cutout, transparent after chroma-key removal, avoid animal subjects, no animals, no Chinese text, no logos."
+    }
+  ]
 }

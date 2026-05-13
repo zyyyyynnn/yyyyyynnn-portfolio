@@ -4,10 +4,11 @@ import { TerminalText } from './TerminalText'
 
 type RetroComputerDockProps = {
   screenRef: RefObject<HTMLDivElement | null>
+  active: boolean
   docked: boolean
 }
 
-export function RetroComputerDock({ screenRef, docked }: RetroComputerDockProps) {
+export function RetroComputerDock({ screenRef, active, docked }: RetroComputerDockProps) {
   return (
     <div className="retro-computer-wrap">
       <div className="retro-computer">
@@ -16,10 +17,12 @@ export function RetroComputerDock({ screenRef, docked }: RetroComputerDockProps)
           alt="Retro computer and keyboard terminal dock"
           className="retro-computer-img"
           label="retro computer"
+          loading="eager"
+          fetchPriority="high"
         />
         <div
           ref={screenRef}
-          className={`retro-screen ${docked ? 'screen-live' : ''}`}
+          className={`retro-screen ${active ? 'screen-active' : ''} ${docked ? 'screen-live' : ''}`}
           id="terminal-dock"
         >
           {docked ? <TerminalText compact /> : null}

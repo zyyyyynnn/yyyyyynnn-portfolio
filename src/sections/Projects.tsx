@@ -1,46 +1,23 @@
-import type { CSSProperties } from 'react'
 import { ImageWithFallback } from '../components/ImageWithFallback'
 import { SectionHeader } from '../components/SectionHeader'
 import { Stamp } from '../components/Stamp'
 import { projects, type Project } from '../data/portfolio'
 import { useProjectScroll } from '../hooks/useProjectScroll'
 
-const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max)
-
 type ProjectCardProps = {
   project: Project
   index: number
-  activeRaw: number
+  active: boolean
 }
 
-function ProjectCard({ project, index, activeRaw }: ProjectCardProps) {
-  const distance = index - activeRaw
-  const isPast = distance < 0
-  const y = isPast ? distance * 34 : distance * 32
-  const rotate = isPast ? clamp(distance * 2.2, -3.5, 0) : clamp(distance * 1.5, 0, 2.6)
-  const scale = 1 - Math.min(Math.abs(distance), 1.4) * 0.032
-  const opacity =
-    distance < -0.8
-      ? Math.max(0.24, 1.28 + distance)
-      : distance > 1.18
-        ? Math.max(0.28, 1.58 - distance)
-        : 1
-  const blur = Math.abs(distance) > 0.9 ? Math.min(Math.abs(distance) * 0.8, 1.2) : 0
-
+function ProjectCard({ project, index, active }: ProjectCardProps) {
   return (
     <article
-      className="paper-card project-scroll-card"
+      className={`paper-card project-scroll-card ${active ? 'active' : ''}`}
       data-project-card={index}
-      style={
-        {
-          zIndex: 20 - Math.round(Math.abs(distance) * 4) + index,
-          opacity,
-          filter: `blur(${blur}px)`,
-          transform: `translate3d(0, ${y}%, 0) rotate(${rotate}deg) scale(${scale})`,
-        } as CSSProperties
-      }
     >
       <span className="folder-tab" aria-hidden="true" />
+      <span className="project-folder-base" aria-hidden="true" />
       <div className="project-ruler" />
       <Stamp>{project.id}</Stamp>
       <div className="project-scroll-copy">
@@ -56,7 +33,6 @@ function ProjectCard({ project, index, activeRaw }: ProjectCardProps) {
         <a className="project-link" href={`https://${project.repo}`} aria-label={`Open ${project.title} GitHub`}>
           {project.repo} ↗
         </a>
-        <p className="hand-note project-note">{project.note}</p>
       </div>
       <div className="project-visual-wrap">
         <span className="photo-tape" aria-hidden="true" />
@@ -65,6 +41,7 @@ function ProjectCard({ project, index, activeRaw }: ProjectCardProps) {
           alt={`${project.title} screenshot`}
           label="project screenshot pending"
           className="project-scroll-shot"
+          loading={index === 0 ? 'eager' : 'lazy'}
         />
         <div className="project-screen-lines" />
       </div>
@@ -73,9 +50,7 @@ function ProjectCard({ project, index, activeRaw }: ProjectCardProps) {
 }
 
 export function Projects() {
-  const { ref, progress } = useProjectScroll(projects.length)
-  const activeRaw = progress * (projects.length - 1)
-  const activeIndex = Math.round(activeRaw)
+  const { ref, activeIndex } = useProjectScroll(projects.length)
 
   return (
     <section className="section projects-section" id="projects">
@@ -83,7 +58,7 @@ export function Projects() {
         number="02"
         title="Projects"
         subtitle="精选项目"
-      note="scroll cards / project archive"
+        note="dossier drawer / archive index"
       />
       <div className="project-scroll-shell" ref={ref} data-reveal>
         <div className="project-scroll-stage">
@@ -101,11 +76,6 @@ export function Projects() {
                 </div>
               ))}
             </div>
-            <p className="hand-note">
-              previous card pulls away,
-              <br />
-              next archive appears.
-            </p>
           </aside>
           <div className="project-card-stage" aria-live="polite">
             {projects.map((project, index) => (
@@ -113,7 +83,7 @@ export function Projects() {
                 key={project.id}
                 project={project}
                 index={index}
-                activeRaw={activeRaw}
+                active={activeIndex === index}
               />
             ))}
           </div>

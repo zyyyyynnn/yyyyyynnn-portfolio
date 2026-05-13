@@ -1,29 +1,59 @@
 # Generated UI Asset Prompts
 
-图像生成未在本轮直接执行到本地文件。以下提示词可用于 GPT Image 2 / OpenAI Images 生成后保存到 `public/assets/generated-ui/`。
+This round used the built-in image generation tool and produced a project-local generated UI asset atlas. The atlas was copied into `public/assets/generated-ui/` as cropped PNG assets after chroma-key removal.
 
-统一风格约束：beige paper archive, quiet collage, vintage computer portfolio, tactile paper texture, clean cutout sticker, subtle grain, transparent background where possible, no animals, no human faces, no logos, no fake brand, no readable long text except optional ARCHIVED, no neon, no cyberpunk, no glossy plastic.
+Source style constraints used for generation:
+- beige paper archive
+- tactile paper texture
+- realistic paper cutout
+- clean collage object
+- subtle grain
+- transparent background after local chroma-key removal
+- avoid animal subjects
+- no animals
+- no human faces
+- no logos
+- no fake brands
+- no Chinese text
+- no long readable text
+- no neon
+- no cyberpunk
+- no glossy plastic
 
-## masking-tape-01.png
-半透明米白胶带，轻微纸纹，透明背景，不要文字，不要阴影过重，用于 Projects / Photos 卡片角落。
+## Asset Prompts
 
-## folder-tab-01.png
-牛皮纸文件夹标签页，复古纸张质感，透明背景，不要文字，用于 Projects 项目档案卡标签。
+### mac-terminal-frame-overlay.png
+macOS-inspired terminal frame detail, subtle titlebar texture, no logo, no readable brand text.
 
-## stamp-archived-01.png
-暗红色圆形或椭圆形做旧印章，可读短词 ARCHIVED，透明背景，低饱和，用于项目卡片。
+### terminal-window-noise.png
+subtle dark terminal texture, low contrast, no text.
 
-## paper-shadow-plate-01.png
-米白纸片，轻微边缘毛边，透明背景，不要文字，用于项目卡片或 Contact 卡片底部阴影纸。
+### terminal-dock-glow.png
+Generated in the atlas but not mounted after review because the green glow conflicts with the revised warmer archive desktop direction. Do not reuse this green-screen prompt in the current UI.
 
-## photo-corner-tape-01.png
-小胶带 / 照片角贴，米白半透明，透明背景，不要文字，用于 Photos 拍立得边角。
+### hero-paper-desk-layer.png
+beige paper desk layer, torn paper edges, tactile paper texture.
 
-## blue-hand-note-01.png
-蓝色手写短线、圈注、箭头形状，透明背景，不要生成可读长句，保持像手写注释而不是图标。
+### folder-stack-base.png
+Generated in the atlas but not mounted after review because its residual color edge made the Projects area visually noisy. Use the CSS paper stack direction instead.
 
-## contact-receipt-bg-01.png
-小型收据纸 / 终端回执卡，米白纸，细虚线，透明或浅米色背景，不要生成具体邮箱文字。
+### folder-tab-archive.png
+kraft paper folder tab, no text.
 
-## screen-glow-overlay-01.png
-轻微柔和白绿色屏幕光，透明背景，不要文字，不要强霓虹，用于电脑屏幕发光叠层。
+### archived-stamp-red.png
+low saturation dark red archive stamp, optional short English word ARCHIVED.
+
+### polaroid-tape-set.png
+small beige semi-transparent masking tape pieces, no text.
+
+### blue-annotation-arrows.png
+blue ink arrows, circles, underlines, and short English notes only: dock here, open archive, light note.
+
+### about-portrait-placeholder.png
+4:5 beige archive portrait placeholder, no human face, optional English text: portrait pending.
+
+### contact-receipt-paper.png
+Generated in the atlas but not mounted after review because the receipt card is cleaner as CSS paper, subtle lines, and no residual edge tint.
+
+### paper-shadow-soft.png
+Generated in the atlas but not mounted after review because the soft shadow plate introduced an unwanted green cast under the computer.

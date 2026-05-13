@@ -25,15 +25,14 @@
 ## 终端文案
 
 ```text
-yyyyyynnn@archive:~$ pnpm run boot:portfolio
-> initializing paper archive...
-> loading project metadata...
-> indexing landscape captures...
-> arranging photo fragments...
-> composing hero layout...
-> syncing terminal to device...
+yyyyyynnn@archive ~ % boot portfolio
+> preparing paper archive
+> loading project dossiers
+> indexing travel frames
+> calibrating retro display
+> aligning terminal dock
 done.
-yyyyyynnn@archive:~$ open home
+yyyyyynnn@archive ~ % open home
 ```
 
 ## 禁止方向
@@ -43,3 +42,4 @@ yyyyyynnn@archive:~$ open home
 - 不改成霓虹、赛博朋克、玻璃拟态、SaaS landing page。
 - 不引入远程图片或 Base64 大图。
 - 不把旅行 / 风景照片内容删除。
+- 不沿用偏离“复古电脑打开的一座纸本档案桌面”的旧生图 prompt。

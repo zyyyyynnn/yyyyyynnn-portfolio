@@ -10,29 +10,41 @@ export function Landscapes() {
         number="03"
         title="Landscape Photography"
         subtitle="风景摄影 · 光线记录"
-        note="pinned / stray light / 随手拍"
+        note="travel frame / city trace"
       />
-      <div className="photo-board" data-reveal>
-        {landscapes.map((landscape) => (
-          <article
-            className="polaroid"
-            key={landscape.id}
-            aria-label={`${landscape.city}, ${landscape.note}`}
-            style={{ '--r': `${landscape.rotation}deg` } as CSSProperties}
-          >
-            <span className="photo-corner" aria-hidden="true" />
-            <ImageWithFallback
-              src={landscape.image}
-              alt={landscape.city}
-              label={landscape.city}
-            />
-          </article>
-        ))}
-        <p className="hand-note board-note">
-          光线记录
-          <br />
-          time pinned
-        </p>
+      <div className="photo-desk" data-reveal>
+        <div className="photo-feature">
+          <p className="eyebrow">Featured Frame / {landscapes[0].id}</p>
+          <ImageWithFallback
+            src={landscapes[0].image}
+            alt={landscapes[0].city}
+            label={landscapes[0].city}
+            className="photo-feature-img"
+            loading="lazy"
+          />
+          <p className="hand-note feature-note">travel frame</p>
+        </div>
+        <div className="photo-board" aria-label="Landscape photography archive">
+          {landscapes.slice(1).map((landscape) => (
+            <article
+              className="polaroid"
+              key={landscape.id}
+              aria-label={`${landscape.city}, ${landscape.note}`}
+              style={{ '--r': `${landscape.rotation}deg` } as CSSProperties}
+            >
+              <span className="photo-corner" aria-hidden="true" />
+              <ImageWithFallback
+                src={landscape.image}
+                alt={landscape.city}
+                label={landscape.city}
+                loading="lazy"
+              />
+            </article>
+          ))}
+          <p className="hand-note board-note">
+            archived light
+          </p>
+        </div>
       </div>
     </section>
   )

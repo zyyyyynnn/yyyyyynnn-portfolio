@@ -1,4 +1,4 @@
-export type TerminalPhase = 'typing' | 'docking' | 'docked' | 'skipped'
+export type TerminalPhase = 'typing' | 'preparing-dock' | 'docking' | 'absorbing' | 'docked' | 'skipped'
 
 export type Project = {
   id: string
@@ -20,15 +20,14 @@ export type Landscape = {
 }
 
 export const terminalLines = [
-  'yyyyyynnn@archive:~$ pnpm run boot:portfolio',
-  '> initializing paper archive...',
-  '> loading project metadata...',
-  '> indexing landscape captures...',
-  '> arranging photo fragments...',
-  '> composing hero layout...',
-  '> syncing terminal to device...',
+  'yyyyyynnn@archive ~ % boot portfolio',
+  '> preparing paper archive',
+  '> loading project dossiers',
+  '> indexing travel frames',
+  '> calibrating retro display',
+  '> aligning terminal dock',
   'done.',
-  'yyyyyynnn@archive:~$ open home',
+  'yyyyyynnn@archive ~ % open home',
 ]
 
 export const projects: Project[] = [

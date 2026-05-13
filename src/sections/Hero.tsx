@@ -8,11 +8,15 @@ type HeroProps = {
 }
 
 export function Hero({ screenRef, terminalPhase }: HeroProps) {
-  const docked =
-    terminalPhase === 'docking' || terminalPhase === 'docked' || terminalPhase === 'skipped'
+  const docked = terminalPhase === 'docked' || terminalPhase === 'skipped'
+  const screenActive =
+    terminalPhase === 'preparing-dock' ||
+    terminalPhase === 'docking' ||
+    terminalPhase === 'absorbing' ||
+    docked
 
   return (
-    <section className={`hero-section ${docked ? 'hero-ready' : ''}`} id="home">
+    <section className={`hero-section ${screenActive ? 'hero-ready' : ''}`} id="home">
       <div className="hero-copy" data-reveal>
         <p className="eyebrow">01 Home / Clean Light Paper Archive</p>
         <h1>
@@ -26,7 +30,7 @@ export function Hero({ screenRef, terminalPhase }: HeroProps) {
       </div>
       <div className="hero-stack" data-reveal>
         <div className="kraft-slab" />
-        <RetroComputerDock screenRef={screenRef} docked={docked} />
+        <RetroComputerDock screenRef={screenRef} active={screenActive} docked={docked} />
       </div>
     </section>
   )
