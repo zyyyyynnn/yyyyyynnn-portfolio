@@ -21,24 +21,26 @@ export function AboutContact() {
   return (
     <>
       <section className="section about-section" id="about">
-        <SectionHeader number="05" title="About" subtitle="关于我" note="one page, one trace" />
+        <SectionHeader number="04" title="About" subtitle="关于我" note="one page, one trace" />
         <article className="paper-card about-card about-single" data-reveal>
-          <Stamp>05</Stamp>
+          <Stamp>04</Stamp>
           <h3>About</h3>
           <p>
-            在校生，写代码，也用手机记录一些光线和猫。喜欢把系统设计和取景角度同等认真地对待：一边整理逻辑，一边收集日常的形状。
+            在校生，写代码，也用手机记录一些光线、城市和日常切片。喜欢把系统设计和取景角度同等认真地对待：一边整理逻辑，一边收集生活里的形状。
           </p>
           <div className="paper-tags">
-            {['Student', 'Frontend', 'System Design', 'Mobile Photography', 'Cats'].map((tag) => (
-              <span key={tag}>{tag}</span>
-            ))}
+            {['Student', 'Frontend', 'System Design', 'Mobile Photography', 'Paper Archive'].map(
+              (tag) => (
+                <span key={tag}>{tag}</span>
+              ),
+            )}
           </div>
         </article>
       </section>
       <section className="section contact-section" id="contact">
-        <SectionHeader number="06" title="Contact" subtitle="联系方式" note="reachable notes" />
+        <SectionHeader number="05" title="Contact" subtitle="联系方式" note="reachable notes" />
         <article className="paper-card contact-card contact-single" data-reveal>
-          <Stamp>06</Stamp>
+          <Stamp>05</Stamp>
           <h3>Contact</h3>
           <a className="contact-line primary" href={`mailto:${contact.primaryEmail}`}>
             {contact.primaryEmail}

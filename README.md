@@ -28,8 +28,8 @@ portfolio_design_package_v3_retro_dock/
 - 终端窗口逼真度增强。
 - 归位后屏幕内保留 mini terminal。
 - 使用真实米白纸纹与牛皮纸纹图片。
-- 保留 Projects 单项目滚动抽离设计。
-- 统一猫图命名为 `cat-01.png` 到 `cat-06.png`。
+- 保留 Projects 项目档案滚动抽离设计。
+- 页面结构统一为 Home / Projects / Photos / About / Contact。
 
 ## 推荐 Codex 使用方式
 

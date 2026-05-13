@@ -11,7 +11,7 @@
 - Projects 区改为“单项目卡片滚动抽离”动效
 - 终端开场为接近全屏黑色 terminal
 - 风景照片按拍立得陈列
-- 猫猫图按撕纸贴纸散落
+- About / Contact 作为文末档案卡收束页面
 
 ## 本版需要保留的设计细节
 
@@ -121,7 +121,7 @@ project-scroll-shell
 - 首页不要网格分割线
 - 不要蓝色 guide line 覆盖 Hero
 - 不要用 body/html overflow hidden
-- Cats 越界只能在 Cats section 容器 overflow hidden
+- Photos 只保留风景与旅行记忆，不混入其他独立题材
 - 不要 Comic Sans
 - 不要外部字体文件
 - 不要 Tailwind / Framer Motion / UI 库

@@ -16,20 +16,21 @@ type ProjectCardProps = {
 function ProjectCard({ project, index, activeRaw }: ProjectCardProps) {
   const distance = index - activeRaw
   const isPast = distance < 0
-  const y = isPast ? distance * 116 : distance * 42
-  const rotate = isPast ? clamp(distance * 4, -7, 0) : clamp(distance * -1.8, -2.5, 0)
-  const scale = 1 - Math.min(Math.abs(distance), 1.4) * 0.038
+  const y = isPast ? distance * 34 : distance * 32
+  const rotate = isPast ? clamp(distance * 2.2, -3.5, 0) : clamp(distance * 1.5, 0, 2.6)
+  const scale = 1 - Math.min(Math.abs(distance), 1.4) * 0.032
   const opacity =
-    distance < -0.75
-      ? Math.max(0, 1.45 + distance)
-      : distance > 1.25
-        ? Math.max(0, 1.7 - distance)
+    distance < -0.8
+      ? Math.max(0.24, 1.28 + distance)
+      : distance > 1.18
+        ? Math.max(0.28, 1.58 - distance)
         : 1
-  const blur = Math.abs(distance) > 0.8 ? Math.min(Math.abs(distance) * 1.4, 2.2) : 0
+  const blur = Math.abs(distance) > 0.9 ? Math.min(Math.abs(distance) * 0.8, 1.2) : 0
 
   return (
     <article
       className="paper-card project-scroll-card"
+      data-project-card={index}
       style={
         {
           zIndex: 20 - Math.round(Math.abs(distance) * 4) + index,
@@ -39,6 +40,7 @@ function ProjectCard({ project, index, activeRaw }: ProjectCardProps) {
         } as CSSProperties
       }
     >
+      <span className="folder-tab" aria-hidden="true" />
       <div className="project-ruler" />
       <Stamp>{project.id}</Stamp>
       <div className="project-scroll-copy">
@@ -57,6 +59,7 @@ function ProjectCard({ project, index, activeRaw }: ProjectCardProps) {
         <p className="hand-note project-note">{project.note}</p>
       </div>
       <div className="project-visual-wrap">
+        <span className="photo-tape" aria-hidden="true" />
         <ImageWithFallback
           src={project.image}
           alt={`${project.title} screenshot`}
@@ -80,7 +83,7 @@ export function Projects() {
         number="02"
         title="Projects"
         subtitle="精选项目"
-        note="scroll cards / project archive"
+      note="scroll cards / project archive"
       />
       <div className="project-scroll-shell" ref={ref} data-reveal>
         <div className="project-scroll-stage">

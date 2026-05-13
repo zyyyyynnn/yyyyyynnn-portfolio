@@ -1,4 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useRef, useState } from 'react'
+
+gsap.registerPlugin(useGSAP, ScrollTrigger)
 
 const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max)
 
@@ -6,30 +11,33 @@ export function useProjectScroll(total: number) {
   const ref = useRef<HTMLDivElement>(null)
   const [progress, setProgress] = useState(0)
 
-  useEffect(() => {
-    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
-      return
-    }
+  useGSAP(
+    () => {
+      const element = ref.current
+      const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false
 
-    const update = () => {
-      if (!ref.current) {
+      if (!element || reducedMotion) {
+        setProgress(0)
         return
       }
 
-      const rect = ref.current.getBoundingClientRect()
-      const scrollable = Math.max(ref.current.offsetHeight - window.innerHeight, 1)
-      setProgress(clamp(-rect.top / scrollable, 0, 1))
-    }
+      const trigger = ScrollTrigger.create({
+        trigger: element,
+        start: 'top top+=72',
+        end: 'bottom bottom',
+        scrub: 0.35,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          setProgress(clamp(self.progress, 0, 1))
+        },
+      })
 
-    update()
-    window.addEventListener('scroll', update, { passive: true })
-    window.addEventListener('resize', update)
-
-    return () => {
-      window.removeEventListener('scroll', update)
-      window.removeEventListener('resize', update)
-    }
-  }, [total])
+      return () => {
+        trigger.kill()
+      }
+    },
+    { dependencies: [total], scope: ref },
+  )
 
   return { ref, progress }
 }

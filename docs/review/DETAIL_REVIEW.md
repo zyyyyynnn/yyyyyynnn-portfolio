@@ -99,7 +99,7 @@ yyyyyynnn@archive:~$ pnpm run boot:portfolio
 > initializing paper archive...
 > loading project metadata...
 > indexing landscape captures...
-> pinning cat stickers...
+> arranging photo fragments...
 > composing hero layout...
 > syncing terminal to device...
 done.
@@ -141,17 +141,6 @@ CSS 伪元素纸纹仅作为辅助，不再替代真实纹理图。
 
 ### 8. 图片命名已统一
 
-猫猫命名统一为：
-
-```text
-cat-01.png
-cat-02.png
-cat-03.png
-cat-04.png
-cat-05.png
-cat-06.png
-```
-
 风景命名统一为：
 
 ```text
@@ -170,7 +159,7 @@ landscape-09-qingdao.jpg
 
 - 没有生成完整 Vite 工程。
 - 没有执行 `npm run build`。
-- 没有包含项目截图、风景图、猫图原始资产，除非你手动放入对应路径。
+- 没有包含项目截图和风景图原始资产，除非你手动放入对应路径。
 - 当前复古电脑素材是你提供的图片文件，已按项目路径打包；如果后续导出透明 PNG，可以同路径替换。
 
 ## 仍需 Codex 实现时重点检查

@@ -19,19 +19,12 @@ export type Landscape = {
   rotation: number
 }
 
-export type Cat = {
-  id: string
-  image: string
-  note: string
-  rotation: number
-}
-
 export const terminalLines = [
   'yyyyyynnn@archive:~$ pnpm run boot:portfolio',
   '> initializing paper archive...',
   '> loading project metadata...',
   '> indexing landscape captures...',
-  '> pinning cat stickers...',
+  '> arranging photo fragments...',
   '> composing hero layout...',
   '> syncing terminal to device...',
   'done.',
@@ -81,15 +74,6 @@ export const landscapes: Landscape[] = [
   { id: '07', city: '丽江 Lijiang', image: '/assets/photos/landscapes/landscape-07-lijiang.jpg', note: 'blue lake', rotation: 3.2 },
   { id: '08', city: '武汉 Wuhan', image: '/assets/photos/landscapes/landscape-08-wuhan.jpg', note: 'night tower', rotation: -1 },
   { id: '09', city: '青岛 Qingdao', image: '/assets/photos/landscapes/landscape-09-qingdao.jpg', note: 'sea frame', rotation: 2 },
-]
-
-export const cats: Cat[] = [
-  { id: '01', image: '/assets/photos/cats/cat-01.png', note: '猫猫出没', rotation: -5 },
-  { id: '02', image: '/assets/photos/cats/cat-02.png', note: 'archived cat', rotation: 4 },
-  { id: '03', image: '/assets/photos/cats/cat-03.png', note: 'quiet visitor', rotation: -2 },
-  { id: '04', image: '/assets/photos/cats/cat-04.png', note: 'found frame', rotation: 6 },
-  { id: '05', image: '/assets/photos/cats/cat-05.png', note: 'take a rest', rotation: -4 },
-  { id: '06', image: '/assets/photos/cats/cat-06.png', note: 'daily companion', rotation: 2 },
 ]
 
 export const contact = {
