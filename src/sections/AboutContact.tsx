@@ -40,7 +40,7 @@ export function AboutContact() {
             </div>
             <p className="hand-note about-note">identity note</p>
           </article>
-          </div>
+        </div>
       </section>
       <section className="section contact-section" id="contact">
         <SectionHeader number="05" title="Contact" subtitle="联系方式" note="reachable notes" />

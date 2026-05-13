@@ -1,42 +1,30 @@
-import { useCallback, useRef, useState } from 'react'
-import type { CSSProperties, RefObject } from 'react'
+import gsap from 'gsap'
+import { useCallback, useRef } from 'react'
+import type { RefObject } from 'react'
 import type { TerminalPhase } from '../data/portfolio'
 
-type DockStyle = CSSProperties & {
-  '--dock-x'?: string
-  '--dock-y'?: string
-  '--dock-scale'?: string
-}
-
 type UseTerminalDockOptions = {
+  coverRef: RefObject<HTMLDivElement | null>
   terminalRef: RefObject<HTMLDivElement | null>
   targetRef: RefObject<HTMLDivElement | null>
   setPhase: (phase: TerminalPhase) => void
 }
 
-export function useTerminalDock({ terminalRef, targetRef, setPhase }: UseTerminalDockOptions) {
-  const timeoutRefs = useRef<number[]>([])
-  const animationRef = useRef<Animation | null>(null)
-  const [dockStyle, setDockStyle] = useState<DockStyle>({
-    '--dock-x': '0px',
-    '--dock-y': '0px',
-    '--dock-scale': '1',
-  })
+export function useTerminalDock({ coverRef, terminalRef, targetRef, setPhase }: UseTerminalDockOptions) {
+  const timelineRef = useRef<gsap.core.Timeline | null>(null)
 
-  const clearDockTimer = useCallback(() => {
-    timeoutRefs.current.forEach((timer) => window.clearTimeout(timer))
-    timeoutRefs.current = []
-    if (animationRef.current) {
-      animationRef.current.cancel()
-      animationRef.current = null
-    }
+  const clearDocking = useCallback(() => {
+    timelineRef.current?.kill()
+    timelineRef.current = null
   }, [])
 
   const startDocking = useCallback(() => {
+    clearDocking()
+    const coverElement = coverRef.current
     const terminalElement = terminalRef.current
     const targetElement = targetRef.current
 
-    if (!terminalElement || !targetElement) {
+    if (!coverElement || !terminalElement || !targetElement) {
       setPhase('skipped')
       return
     }
@@ -54,98 +42,75 @@ export function useTerminalDock({ terminalRef, targetRef, setPhase }: UseTermina
     const targetCenterY = targetRect.top + targetRect.height / 2
     const translateX = targetCenterX - terminalCenterX
     const translateY = targetCenterY - terminalCenterY
-    const finalTransform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`
-    const overshootTransform = `translate3d(${translateX * 0.96}px, ${translateY * 0.96}px, 0) scale(${scale * 1.06})`
 
-    setDockStyle({
-      '--dock-x': `${translateX}px`,
-      '--dock-y': `${translateY}px`,
-      '--dock-scale': `${scale}`,
+    setPhase('docking')
+    targetElement.style.setProperty('--screen-dock-glow', '0')
+    gsap.set(coverElement, { autoAlpha: 1 })
+    gsap.set(terminalElement, {
+      x: 0,
+      y: 0,
+      scale: 1,
+      autoAlpha: 1,
+      opacity: 1,
+      filter: 'none',
+      borderRadius: 16,
+      transformOrigin: '50% 50%',
+      boxShadow: '0 26px 78px rgba(0, 0, 0, 0.42), 0 1px 0 rgba(255, 255, 255, 0.1) inset',
     })
-    clearDockTimer()
-    terminalElement.style.transform = 'translate3d(0, 0, 0) scale(1)'
-    terminalElement.style.opacity = '1'
-    terminalElement.style.filter = 'blur(0)'
-    terminalElement.style.clipPath = 'inset(0% round 18px)'
-    terminalElement.style.borderRadius = '18px'
-    setPhase('preparing-dock')
 
-    const dockTimer = window.setTimeout(() => {
-      setPhase('docking')
-      animationRef.current = terminalElement.animate(
-        [
-          {
-            transform: 'translate3d(0, 0, 0) scale(1)',
-            opacity: 1,
-            filter: 'blur(0) brightness(1)',
-            clipPath: 'inset(0% round 18px)',
-            borderRadius: '18px',
-            offset: 0,
-          },
-          {
-            transform: `translate3d(${translateX * 0.08}px, ${translateY * 0.08}px, 0) scale(0.985)`,
-            opacity: 1,
-            filter: 'blur(0) brightness(1.03)',
-            clipPath: 'inset(0% round 18px)',
-            borderRadius: '18px',
-            offset: 0.16,
-          },
-          {
-            transform: `translate3d(${translateX * 0.62}px, ${translateY * 0.62}px, 0) scale(${0.42 + scale * 0.58})`,
-            opacity: 0.98,
-            filter: 'blur(0.18px) brightness(1.05)',
-            clipPath: 'inset(0% round 15px)',
-            borderRadius: '15px',
-            offset: 0.62,
-          },
-          {
-            transform: overshootTransform,
-            opacity: 0.9,
-            filter: 'blur(0.28px) brightness(1.08)',
-            clipPath: 'inset(2% 4% round 11px)',
-            borderRadius: '11px',
-            offset: 0.82,
-          },
-          {
-            transform: finalTransform,
-            opacity: 0.64,
-            filter: 'blur(0.48px) brightness(1.1)',
-            clipPath: 'inset(12% 18% round 9px)',
-            borderRadius: '9px',
-            offset: 0.94,
-          },
-          {
-            transform: finalTransform,
-            opacity: 0.36,
-            filter: 'blur(0.7px) brightness(1.12)',
-            clipPath: 'inset(31% 38% round 9px)',
-            borderRadius: '9px',
-            offset: 1,
-          },
-        ],
+    timelineRef.current = gsap.timeline({
+      defaults: { ease: 'power2.inOut' },
+      onComplete: () => {
+        gsap.set(coverElement, { autoAlpha: 0, pointerEvents: 'none' })
+        gsap.set(terminalElement, { clearProps: 'transform,opacity,visibility,filter,borderRadius,boxShadow' })
+        targetElement.style.removeProperty('--screen-dock-glow')
+        timelineRef.current = null
+        setPhase('docked')
+      },
+    })
+
+    timelineRef.current
+      .to(terminalElement, {
+        scale: 0.985,
+        y: -8,
+        duration: 0.18,
+      })
+      .to(
+        coverElement,
         {
-          duration: 1420,
-          easing: 'cubic-bezier(0.22, 1, 0.36, 1)',
-          fill: 'forwards',
+          backgroundColor: 'rgba(244, 237, 223, 0.18)',
+          duration: 0.22,
         },
+        '<',
       )
+      .to(
+        targetElement,
+        {
+          '--screen-dock-glow': 0.55,
+          duration: 0.22,
+        },
+        '<',
+      )
+      .to(terminalElement, {
+        x: translateX,
+        y: translateY,
+        scale,
+        opacity: 0.92,
+        borderRadius: 9,
+        boxShadow: '0 8px 22px rgba(0, 0, 0, 0.24), 0 1px 0 rgba(255, 255, 255, 0.08) inset',
+        duration: 0.78,
+        ease: 'power3.inOut',
+      })
+      .to(
+        targetElement,
+        {
+          '--screen-dock-glow': 0.82,
+          duration: 0.16,
+        },
+        '-=0.18',
+      )
+      .to(coverElement, { autoAlpha: 0, duration: 0.12 }, '-=0.04')
+  }, [clearDocking, coverRef, setPhase, targetRef, terminalRef])
 
-      const absorbTimer = window.setTimeout(() => setPhase('absorbing'), 1120)
-      timeoutRefs.current.push(absorbTimer)
-      animationRef.current.finished
-        .then(() => {
-          terminalElement.style.transform = finalTransform
-          terminalElement.style.opacity = '0.32'
-          terminalElement.style.filter = 'blur(0.7px) brightness(1.12)'
-          terminalElement.style.clipPath = 'inset(31% 38% round 9px)'
-          setPhase('docked')
-        })
-        .catch(() => undefined)
-      const doneTimer = window.setTimeout(() => setPhase('docked'), 1660)
-      timeoutRefs.current.push(doneTimer)
-    }, 180)
-    timeoutRefs.current.push(dockTimer)
-  }, [clearDockTimer, setPhase, targetRef, terminalRef])
-
-  return { dockStyle, startDocking, clearDockTimer }
+  return { startDocking, clearDocking }
 }

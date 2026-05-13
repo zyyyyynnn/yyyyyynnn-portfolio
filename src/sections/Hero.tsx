@@ -9,11 +9,7 @@ type HeroProps = {
 
 export function Hero({ screenRef, terminalPhase }: HeroProps) {
   const docked = terminalPhase === 'docked' || terminalPhase === 'skipped'
-  const screenActive =
-    terminalPhase === 'preparing-dock' ||
-    terminalPhase === 'docking' ||
-    terminalPhase === 'absorbing' ||
-    docked
+  const screenActive = terminalPhase === 'docking' || docked
 
   return (
     <section className={`hero-section ${screenActive ? 'hero-ready' : ''}`} id="home">

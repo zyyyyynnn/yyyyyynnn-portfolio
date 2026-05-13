@@ -25,7 +25,7 @@ export function useGsapReveal(scopeRef: RefObject<HTMLElement | null>) {
           opacity: 1,
           y: 0,
           rotation: 0,
-          filter: 'blur(0)',
+          filter: 'none',
           clearProps: 'transform',
         })
         return
@@ -35,9 +35,7 @@ export function useGsapReveal(scopeRef: RefObject<HTMLElement | null>) {
         const isPhotoArea = item.classList.contains('photo-desk')
         const targets = isPhotoArea
           ? gsap.utils.toArray<HTMLElement>('.photo-feature, .polaroid', item)
-          : item.classList.contains('project-scroll-shell')
-            ? gsap.utils.toArray<HTMLElement>('.project-index-panel, .project-scroll-card', item)
-            : [item]
+          : [item]
         const animatesChildren = targets.length > 0 && targets[0] !== item
 
         if (animatesChildren) {
@@ -45,7 +43,7 @@ export function useGsapReveal(scopeRef: RefObject<HTMLElement | null>) {
             autoAlpha: 1,
             y: 0,
             rotation: 0,
-            filter: 'blur(0)',
+            filter: 'none',
           })
         }
 
@@ -53,9 +51,9 @@ export function useGsapReveal(scopeRef: RefObject<HTMLElement | null>) {
           targets,
           {
             autoAlpha: 0,
-            y: 24,
-            rotate: -1,
-            filter: isPhotoArea ? 'none' : 'blur(2px)',
+            y: isPhotoArea ? 16 : 20,
+            rotate: isPhotoArea ? 0 : -0.4,
+            filter: 'none',
           },
           {
             autoAlpha: 1,
@@ -65,10 +63,10 @@ export function useGsapReveal(scopeRef: RefObject<HTMLElement | null>) {
               const rotation = Number.parseFloat(element.style.getPropertyValue('--r'))
               return element.classList.contains('polaroid') && Number.isFinite(rotation) ? rotation : 0
             },
-            filter: isPhotoArea ? 'none' : 'blur(0)',
-            duration: 0.78,
-            ease: 'power3.out',
-            stagger: targets.length > 1 ? 0.09 : 0,
+            filter: 'none',
+            duration: isPhotoArea ? 0.38 : 0.56,
+            ease: 'power2.out',
+            stagger: targets.length > 1 ? 0.03 : 0,
             scrollTrigger: {
               trigger: item,
               start: 'top 82%',

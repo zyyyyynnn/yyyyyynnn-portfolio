@@ -3,7 +3,6 @@ import { ImageWithFallback } from './ImageWithFallback'
 export function PortraitFrame() {
   return (
     <div className="portrait-frame" data-reveal>
-      <span className="portrait-tape" aria-hidden="true" />
       <ImageWithFallback
         src="/assets/about/about-portrait.jpg"
         alt="Portrait frame placeholder"

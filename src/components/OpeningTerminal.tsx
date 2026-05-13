@@ -11,8 +11,10 @@ type OpeningTerminalProps = {
 }
 
 export function OpeningTerminal({ targetRef, phase, setPhase }: OpeningTerminalProps) {
+  const coverRef = useRef<HTMLDivElement>(null)
   const terminalRef = useRef<HTMLDivElement>(null)
-  const { dockStyle, startDocking, clearDockTimer } = useTerminalDock({
+  const { startDocking, clearDocking } = useTerminalDock({
+    coverRef,
     terminalRef,
     targetRef,
     setPhase,
@@ -28,17 +30,18 @@ export function OpeningTerminal({ targetRef, phase, setPhase }: OpeningTerminalP
 
     return () => {
       window.clearTimeout(timer)
-      clearDockTimer()
+      clearDocking()
     }
-  }, [clearDockTimer, setPhase, startDocking])
+  }, [clearDocking, setPhase, startDocking])
 
   const skip = () => {
-    clearDockTimer()
+    clearDocking()
     setPhase('skipped')
   }
 
   return (
     <div
+      ref={coverRef}
       className={`terminal-cover ${phase}`}
       aria-hidden={phase === 'docked' || phase === 'skipped'}
     >
@@ -48,14 +51,6 @@ export function OpeningTerminal({ targetRef, phase, setPhase }: OpeningTerminalP
       <div
         ref={terminalRef}
         className="terminal-window"
-        style={
-          phase === 'preparing-dock' ||
-          phase === 'docking' ||
-          phase === 'absorbing' ||
-          phase === 'docked'
-            ? dockStyle
-            : undefined
-        }
       >
         <div className="terminal-titlebar">
           <div className="terminal-controls" aria-hidden="true">

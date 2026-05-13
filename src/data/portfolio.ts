@@ -1,4 +1,4 @@
-export type TerminalPhase = 'typing' | 'preparing-dock' | 'docking' | 'absorbing' | 'docked' | 'skipped'
+export type TerminalPhase = 'typing' | 'docking' | 'docked' | 'skipped'
 
 export type Project = {
   id: string

@@ -32,13 +32,13 @@ export function Landscapes() {
               aria-label={`${landscape.city}, ${landscape.note}`}
               style={{ '--r': `${landscape.rotation}deg` } as CSSProperties}
             >
-              <span className="photo-corner" aria-hidden="true" />
               <ImageWithFallback
                 src={landscape.image}
                 alt={landscape.city}
                 label={landscape.city}
                 loading="lazy"
               />
+              <p className="polaroid-caption">{landscape.city} / {landscape.note}</p>
             </article>
           ))}
           <p className="hand-note board-note">

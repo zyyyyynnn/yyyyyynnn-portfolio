@@ -7,17 +7,14 @@ import { useProjectScroll } from '../hooks/useProjectScroll'
 type ProjectCardProps = {
   project: Project
   index: number
-  active: boolean
 }
 
-function ProjectCard({ project, index, active }: ProjectCardProps) {
+function ProjectCard({ project, index }: ProjectCardProps) {
   return (
     <article
-      className={`paper-card project-scroll-card ${active ? 'active' : ''}`}
+      className="paper-card project-scroll-card"
       data-project-card={index}
     >
-      <span className="folder-tab" aria-hidden="true" />
-      <span className="project-folder-base" aria-hidden="true" />
       <div className="project-ruler" />
       <Stamp>{project.id}</Stamp>
       <div className="project-scroll-copy">
@@ -35,7 +32,6 @@ function ProjectCard({ project, index, active }: ProjectCardProps) {
         </a>
       </div>
       <div className="project-visual-wrap">
-        <span className="photo-tape" aria-hidden="true" />
         <ImageWithFallback
           src={project.image}
           alt={`${project.title} screenshot`}
@@ -43,14 +39,13 @@ function ProjectCard({ project, index, active }: ProjectCardProps) {
           className="project-scroll-shot"
           loading={index === 0 ? 'eager' : 'lazy'}
         />
-        <div className="project-screen-lines" />
       </div>
     </article>
   )
 }
 
 export function Projects() {
-  const { ref, activeIndex } = useProjectScroll(projects.length)
+  const { ref } = useProjectScroll()
 
   return (
     <section className="section projects-section" id="projects">
@@ -61,32 +56,10 @@ export function Projects() {
         note="dossier drawer / archive index"
       />
       <div className="project-scroll-shell" ref={ref} data-reveal>
-        <div className="project-scroll-stage">
-          <aside className="project-index-panel">
-            <p className="eyebrow">Current Project</p>
-            <div className="project-counter">{String(activeIndex + 1).padStart(2, '0')}</div>
-            <div className="project-track">
-              {projects.map((project, index) => (
-                <div
-                  className={`project-track-item ${activeIndex === index ? 'active' : ''}`}
-                  key={project.id}
-                >
-                  <span>{project.id}</span>
-                  <strong>{project.title}</strong>
-                </div>
-              ))}
-            </div>
-          </aside>
-          <div className="project-card-stage" aria-live="polite">
-            {projects.map((project, index) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                index={index}
-                active={activeIndex === index}
-              />
-            ))}
-          </div>
+        <div className="project-card-stage">
+          {projects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
+          ))}
         </div>
       </div>
     </section>

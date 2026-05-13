@@ -1212,9 +1212,7 @@ img {
     linear-gradient(135deg, rgba(7, 7, 6, 0.96), rgba(20, 18, 15, 0.92));
 }
 
-.terminal-cover.preparing-dock,
-.terminal-cover.docking,
-.terminal-cover.absorbing {
+.terminal-cover.docking {
   background:
     radial-gradient(circle at 58% 42%, rgba(244, 236, 218, 0.09), transparent 24%),
     rgba(244, 237, 223, 0.18);
@@ -1222,15 +1220,11 @@ img {
   pointer-events: none;
 }
 
-.terminal-cover.preparing-dock::after,
-.terminal-cover.docking::after,
-.terminal-cover.absorbing::after {
+.terminal-cover.docking::after {
   opacity: 0.025;
 }
 
-.terminal-cover.preparing-dock .skip,
-.terminal-cover.docking .skip,
-.terminal-cover.absorbing .skip {
+.terminal-cover.docking .skip {
   opacity: 0;
 }
 
@@ -1240,9 +1234,9 @@ img {
   color: rgba(239, 235, 218, 0.86);
   background-image:
     linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent 16%),
-    linear-gradient(135deg, rgba(9, 10, 9, 0.94), rgba(24, 23, 20, 0.96)),
-    url("/assets/generated-ui/terminal-window-noise.png");
-  background-size: auto, auto, cover;
+    radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.035), transparent 32%),
+    linear-gradient(135deg, rgba(9, 10, 9, 0.94), rgba(24, 23, 20, 0.96));
+  background-size: auto;
   box-shadow:
     0 26px 78px rgba(0, 0, 0, 0.42),
     0 0 0 1px rgba(255, 255, 255, 0.04) inset,
@@ -1312,9 +1306,8 @@ img {
 .kraft-slab {
   background-image:
     linear-gradient(rgba(111, 89, 67, 0.1), rgba(111, 89, 67, 0.1)),
-    url("/assets/generated-ui/hero-paper-desk-layer.png"),
     url("/assets/textures/kraft-clean.jpg");
-  background-size: cover, cover, 560px auto;
+  background-size: cover, 560px auto;
 }
 
 .computer-shadow-plate {
@@ -1405,7 +1398,7 @@ img {
   padding: 0;
   color: transparent;
   border: 0;
-  background: url("/assets/generated-ui/archived-stamp-red.png") center / contain no-repeat;
+  background: none;
 }
 
 .project-folder-base {
@@ -1418,7 +1411,7 @@ img {
   top: -34px;
   left: 42px;
   border: 0;
-  background: url("/assets/generated-ui/folder-tab-archive.png") center / contain no-repeat;
+  background: none;
 }
 
 .project-visual-wrap::before,
@@ -1427,7 +1420,9 @@ img {
 .polaroid:nth-child(2n)::after,
 .about-card::after,
 .contact-card::after {
-  background: url("/assets/generated-ui/polaroid-tape-set.png") center / cover no-repeat;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.22), transparent 58%),
+    var(--tape);
 }
 
 .project-scroll-copy {
@@ -1463,7 +1458,9 @@ img {
   position: absolute;
   top: -15px;
   left: 32%;
-  background: url("/assets/generated-ui/polaroid-tape-set.png") center / cover no-repeat;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.22), transparent 58%),
+    var(--tape);
 }
 
 .photo-feature-img {
@@ -1598,7 +1595,9 @@ img {
   left: 22px;
   z-index: 2;
   transform: rotate(-12deg);
-  background: url("/assets/generated-ui/polaroid-tape-set.png") center / cover no-repeat;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.22), transparent 58%),
+    var(--tape);
 }
 
 .portrait-meta {
@@ -1901,6 +1900,288 @@ img {
     position: relative;
     opacity: 1 !important;
     filter: none !important;
+    transform: none !important;
+  }
+}
+
+/* Stability pass: keep the archive look, remove fragile stacking and generated-asset clutter. */
+.terminal-cover.docking {
+  background:
+    radial-gradient(circle at 60% 44%, rgba(244, 237, 223, 0.11), transparent 28%),
+    rgba(244, 237, 223, 0.16);
+  backdrop-filter: blur(1.5px);
+  pointer-events: none;
+}
+
+.terminal-cover.docking::after {
+  opacity: 0.02;
+}
+
+.terminal-window {
+  border-radius: 16px;
+  border: 1px solid rgba(250, 242, 221, 0.18);
+  color: rgba(239, 235, 218, 0.86);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), transparent 18%),
+    radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.035), transparent 32%),
+    linear-gradient(135deg, rgba(13, 14, 13, 0.96), rgba(24, 23, 21, 0.98));
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.4),
+    0 1px 0 rgba(255, 255, 255, 0.1) inset,
+    inset 0 -30px 56px rgba(0, 0, 0, 0.24);
+}
+
+.terminal-window::after {
+  opacity: 0.025;
+}
+
+.terminal-mini-lines {
+  animation-delay: 0s !important;
+}
+
+.retro-screen.screen-active::after {
+  opacity: calc(0.14 + var(--screen-dock-glow, 0) * 0.18);
+  background: radial-gradient(circle at 50% 48%, rgba(245, 235, 213, 0.18), transparent 70%);
+}
+
+.retro-screen.screen-live::after {
+  opacity: 0.22;
+}
+
+.hero-section::before {
+  opacity: 0.36;
+}
+
+.kraft-slab {
+  background-image:
+    linear-gradient(rgba(111, 89, 67, 0.1), rgba(111, 89, 67, 0.1)),
+    url("/assets/textures/kraft-clean.jpg");
+  background-size: cover;
+}
+
+.project-scroll-shell {
+  height: auto;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 24px;
+  border: 0;
+  background: transparent;
+}
+
+.project-scroll-stage,
+.project-index-panel {
+  display: none;
+}
+
+.project-card-stage {
+  height: auto;
+  min-height: 0;
+  display: grid;
+  gap: clamp(26px, 4vw, 42px);
+  perspective: none;
+}
+
+.project-scroll-card {
+  min-height: 0;
+  position: relative;
+  inset: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 34%);
+  gap: clamp(24px, 4vw, 44px);
+  align-items: start;
+  overflow: hidden;
+  padding: clamp(30px, 4vw, 52px);
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  will-change: transform, opacity;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
+}
+
+.project-scroll-card:nth-child(2) {
+  margin-left: clamp(0px, 3vw, 34px);
+}
+
+.project-scroll-card:nth-child(3) {
+  margin-right: clamp(0px, 3vw, 34px);
+}
+
+.project-scroll-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.46) inset,
+    0 18px 34px rgba(49, 38, 26, 0.13);
+}
+
+.project-scroll-card::after,
+.folder-tab,
+.project-folder-base,
+.project-visual-wrap::before,
+.photo-tape {
+  display: none !important;
+}
+
+.project-scroll-card:not(.active) .project-scroll-copy,
+.project-scroll-card:not(.active) .project-visual-wrap {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.project-scroll-copy {
+  width: auto;
+  max-width: 680px;
+}
+
+.project-scroll-card h3 {
+  max-width: 640px;
+  font-size: clamp(38px, 4.4vw, 62px);
+  line-height: 0.98;
+}
+
+.project-visual-wrap {
+  width: 100%;
+  position: relative;
+  right: auto;
+  bottom: auto;
+  align-self: center;
+  padding: 10px;
+  transform: rotate(1.4deg);
+  overflow: hidden;
+}
+
+.project-scroll-shot {
+  height: auto;
+  object-fit: contain;
+}
+
+.photo-desk {
+  align-items: start;
+}
+
+.photo-feature {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: 0 14px 26px rgba(49, 38, 26, 0.1);
+  overflow: visible;
+}
+
+.photo-feature::before,
+.photo-corner,
+.polaroid:nth-child(2n)::after {
+  display: none !important;
+}
+
+.photo-feature .eyebrow {
+  margin-bottom: 10px;
+}
+
+.photo-feature-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  display: block;
+  object-fit: contain;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+}
+
+.feature-note {
+  right: 12px;
+  bottom: 12px;
+}
+
+.photo-board {
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 24px);
+  padding: clamp(20px, 3vw, 34px);
+}
+
+.polaroid {
+  padding: 0;
+  overflow: visible;
+  background: transparent;
+  filter: drop-shadow(0 10px 18px rgba(49, 38, 26, 0.12));
+  contain: layout paint;
+}
+
+.polaroid img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  display: block;
+  object-fit: contain;
+  background: transparent;
+}
+
+.polaroid .image-fallback {
+  min-height: 160px;
+  aspect-ratio: 4 / 3;
+}
+
+.polaroid-caption {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.portrait-tape {
+  display: none;
+}
+
+.about-card::after,
+.contact-card::after {
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.22), transparent 58%),
+    var(--tape);
+}
+
+@media (max-width: 900px) {
+  .project-scroll-shell {
+    padding: 0;
+  }
+
+  .project-scroll-card {
+    grid-template-columns: 1fr;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .project-visual-wrap {
+    max-width: 420px;
+  }
+
+  .photo-board {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .polaroid,
+  .polaroid:nth-child(n) {
+    grid-column: auto;
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 540px) {
+  .project-scroll-card {
+    padding: 26px 22px;
+  }
+
+  .photo-board {
+    grid-template-columns: 1fr;
+    padding: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-scroll-card {
+    opacity: 1 !important;
+    visibility: visible !important;
     transform: none !important;
   }
 }
