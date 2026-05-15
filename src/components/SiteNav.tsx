@@ -10,7 +10,14 @@ export function SiteNav() {
   return (
     <nav className="site-nav" aria-label="Main navigation">
       <a className="brand" href="#home">
-        yyyyyynnn
+        <img
+          className="brand-avatar"
+          src="/assets/brand/nav-avatar.png"
+          alt="yyyyyynnn avatar"
+          width="34"
+          height="34"
+        />
+        <span>yyyyyynnn</span>
       </a>
       <div className="nav-links">
         {navItems.map(([id, label, href]) => (

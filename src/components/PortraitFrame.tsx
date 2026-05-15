@@ -5,8 +5,8 @@ export function PortraitFrame() {
     <div className="portrait-frame" data-reveal>
       <ImageWithFallback
         src="/assets/about/about-portrait.jpg"
-        alt="Portrait frame placeholder"
-        label="portrait pending"
+        alt="Personal portrait"
+        label="portrait unavailable"
         className="portrait-img"
       />
       <div className="portrait-meta" aria-hidden="true">

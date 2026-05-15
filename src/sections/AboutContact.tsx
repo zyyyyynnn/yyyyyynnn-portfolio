@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { SectionHeader } from '../components/SectionHeader'
 import { PortraitFrame } from '../components/PortraitFrame'
-import { Stamp } from '../components/Stamp'
 import { contact } from '../data/portfolio'
 
 type CopyTarget = 'qq' | 'wechat' | 'failed' | ''
@@ -26,7 +25,6 @@ export function AboutContact() {
         <div className="about-dossier">
           <PortraitFrame />
           <article className="paper-card about-card about-single" data-reveal>
-            <Stamp>04</Stamp>
             <h3>About</h3>
             <p>
               在校生，写代码，也用手机记录一些光线、城市和日常切片。喜欢把系统设计和取景角度同等认真地对待：一边整理逻辑，一边收集生活里的形状。
@@ -46,7 +44,6 @@ export function AboutContact() {
         <div className="contact-dossier">
           <SectionHeader number="05" title="Contact" subtitle="联系方式" note="reachable notes" />
           <article className="paper-card contact-card contact-single" data-reveal>
-            <Stamp>05</Stamp>
             {copied === 'qq' || copied === 'wechat' ? <span className="copied-stamp">copied</span> : null}
             <h3>Contact</h3>
             <a className="contact-line primary" href={`mailto:${contact.primaryEmail}`}>
