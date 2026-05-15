@@ -101,7 +101,7 @@ img {
   position: relative;
   overflow-x: clip;
   background-image:
-    linear-gradient(rgba(244, 237, 223, 0.72), rgba(244, 237, 223, 0.72)),
+    linear-gradient(rgba(245, 242, 236, 0.72), rgba(245, 242, 236, 0.72)),
     url("/assets/textures/paper-clean.jpg");
   background-size: cover;
   background-attachment: fixed;
@@ -144,7 +144,7 @@ img {
   gap: 28px;
   padding: 18px clamp(22px, 5vw, 72px);
   border-bottom: 1px solid var(--line-soft);
-  background: rgba(251, 246, 235, 0.78);
+  background: rgba(250, 248, 243, 0.82);
   backdrop-filter: blur(12px);
 }
 
@@ -163,12 +163,12 @@ img {
   height: 34px;
   flex: 0 0 auto;
   object-fit: cover;
-  border: 1px solid rgba(22, 18, 15, 0.16);
+  border: 1px solid rgba(28, 24, 20, 0.14);
   border-radius: 50%;
-  background: var(--paper-card);
+  background: var(--paper-bg);
   box-shadow:
-    0 3px 8px rgba(49, 38, 26, 0.1),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+    0 2px 6px rgba(42, 36, 30, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.32);
 }
 
 .nav-links {
@@ -657,12 +657,25 @@ img {
 }
 
 .hand-note {
-  color: var(--note-blue-soft);
-  font-family: "Segoe Print", "Kaiti SC", "STKaiti", "KaiTi", cursive;
+  color: rgba(54, 82, 120, 0.56);
+  font-family: "Segoe Print", "Bradley Hand ITC", "Kaiti SC", "STKaiti", cursive;
+  font-size: 11px;
+  font-weight: 400;
   line-height: 1.35;
-  letter-spacing: 0.01em;
-  text-shadow: 0 0.35px rgba(69, 109, 164, 0.14);
-  transform: rotate(-2.4deg);
+  letter-spacing: 0.02em;
+  text-shadow: none;
+  transform: rotate(-3deg);
+}
+
+.hand-note::after {
+  content: "";
+  display: block;
+  width: 42px;
+  height: 1px;
+  margin-top: 5px;
+  background: currentColor;
+  opacity: 0.34;
+  transform: rotate(-2deg);
 }
 
 [data-reveal] {
@@ -821,7 +834,7 @@ img {
 
 .project-index-panel .hand-note {
   max-width: 180px;
-  font-size: 13px;
+  font-size: 11px;
 }
 
 .project-card-stage {
@@ -1365,10 +1378,10 @@ img {
 .project-scroll-shell {
   height: 190vh;
   background-image:
-    linear-gradient(rgba(102, 78, 52, 0.34), rgba(102, 78, 52, 0.16)),
-    url("/assets/textures/kraft-clean.jpg");
-  background-size: auto, 640px auto;
-  background-repeat: repeat, repeat;
+    linear-gradient(rgba(178, 168, 154, 0.18), rgba(178, 168, 154, 0.08)),
+    url("/assets/textures/paper-clean.jpg");
+  background-size: auto, cover;
+  background-repeat: repeat;
   background-position: center;
 }
 
@@ -3019,6 +3032,14 @@ img {
 
 .contact-card .hand-note {
   margin-top: 18px;
+}
+
+.contact-card .hand-note::after {
+  width: 34px;
+}
+
+.board-note::after {
+  width: 50px;
 }
 
 @media (max-width: 760px) {

@@ -12,7 +12,7 @@ export function SiteNav() {
       <a className="brand" href="#home">
         <img
           className="brand-avatar"
-          src="/assets/brand/nav-avatar.png"
+          src="/assets/brand/nav-avatar-master.png"
           alt="yyyyyynnn avatar"
           width="34"
           height="34"
