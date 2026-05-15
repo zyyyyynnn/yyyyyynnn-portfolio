@@ -43,29 +43,31 @@ export function AboutContact() {
         </div>
       </section>
       <section className="section contact-section" id="contact">
-        <SectionHeader number="05" title="Contact" subtitle="联系方式" note="reachable notes" />
-        <article className="paper-card contact-card contact-single" data-reveal>
-          <Stamp>05</Stamp>
-          {copied === 'qq' || copied === 'wechat' ? <span className="copied-stamp">copied</span> : null}
-          <h3>Contact</h3>
-          <a className="contact-line primary" href={`mailto:${contact.primaryEmail}`}>
-            {contact.primaryEmail}
-          </a>
-          <a className="contact-line" href={contact.github} target="_blank" rel="noreferrer">
-            {contact.githubLabel} ↗
-          </a>
-          <p className="contact-line">Douyin: {contact.douyin}</p>
-          <div className="copy-row">
-            <button type="button" onClick={() => copy('qq', contact.secondaryEmail)}>
-              {copied === 'qq' ? 'Copied' : 'Copy QQ Email'}
-            </button>
-            <button type="button" onClick={() => copy('wechat', contact.wechat)}>
-              {copied === 'wechat' ? 'Copied' : 'Copy WeChat'}
-            </button>
-          </div>
-          {copied === 'failed' ? <p className="copy-status">Copy failed</p> : null}
-          <p className="hand-note">copy receipt</p>
-        </article>
+        <div className="contact-dossier">
+          <SectionHeader number="05" title="Contact" subtitle="联系方式" note="reachable notes" />
+          <article className="paper-card contact-card contact-single" data-reveal>
+            <Stamp>05</Stamp>
+            {copied === 'qq' || copied === 'wechat' ? <span className="copied-stamp">copied</span> : null}
+            <h3>Contact</h3>
+            <a className="contact-line primary" href={`mailto:${contact.primaryEmail}`}>
+              {contact.primaryEmail}
+            </a>
+            <a className="contact-line" href={contact.github} target="_blank" rel="noreferrer">
+              {contact.githubLabel} ↗
+            </a>
+            <p className="contact-line">Douyin: {contact.douyin}</p>
+            <div className="copy-row">
+              <button type="button" onClick={() => copy('qq', contact.secondaryEmail)}>
+                {copied === 'qq' ? 'Copied' : 'Copy QQ Email'}
+              </button>
+              <button type="button" onClick={() => copy('wechat', contact.wechat)}>
+                {copied === 'wechat' ? 'Copied' : 'Copy WeChat'}
+              </button>
+            </div>
+            {copied === 'failed' ? <p className="copy-status">Copy failed</p> : null}
+            <p className="hand-note">copy receipt</p>
+          </article>
+        </div>
       </section>
     </>
   )

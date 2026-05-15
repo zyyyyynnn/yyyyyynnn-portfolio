@@ -346,7 +346,7 @@ img {
 .hero-section {
   min-height: calc(100vh - 74px);
   display: grid;
-  grid-template-columns: 0.94fr 1.06fr;
+  grid-template-columns: 1fr 1.15fr;
   align-items: center;
   gap: clamp(28px, 4vw, 58px);
 }
@@ -426,7 +426,7 @@ img {
 }
 
 .retro-computer-wrap {
-  width: min(660px, 104%);
+  width: min(720px, 110%);
   margin-left: auto;
   position: relative;
   transform: rotate(1.2deg);
@@ -958,23 +958,7 @@ img {
   text-transform: uppercase;
 }
 
-.photo-board {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  align-items: start;
-  gap: 18px 22px;
-  padding: clamp(28px, 4vw, 46px);
-  border: 1px solid var(--line-paper);
-  border-radius: 4px;
-  background-image:
-    linear-gradient(rgba(158, 133, 100, 0.22), rgba(158, 133, 100, 0.22)),
-    url("/assets/textures/kraft-clean.jpg");
-  background-size: auto, 640px auto;
-  background-repeat: repeat;
-  background-position: center;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-}
+
 
 .polaroid {
   position: relative;
@@ -1024,47 +1008,50 @@ img {
   background: var(--tape);
 }
 
-.polaroid:nth-child(1) {
-  grid-column: 1 / span 4;
+.polaroid-featured {
+  grid-column: 1 / span 6;
+  margin-top: 0;
+  transform: rotate(-1deg);
 }
 
 .polaroid:nth-child(2) {
-  grid-column: 5 / span 4;
-  margin-top: 18px;
+  grid-column: 7 / span 5;
+  margin-top: 40px;
 }
 
 .polaroid:nth-child(3) {
-  grid-column: 9 / span 4;
+  grid-column: 2 / span 4;
+  margin-top: 10px;
 }
 
 .polaroid:nth-child(4) {
-  grid-column: 2 / span 3;
-  margin-top: -8px;
+  grid-column: 6 / span 4;
+  margin-top: 50px;
 }
 
 .polaroid:nth-child(5) {
-  grid-column: 5 / span 4;
-  margin-top: 16px;
+  grid-column: 10 / span 3;
+  margin-top: -10px;
 }
 
 .polaroid:nth-child(6) {
-  grid-column: 9 / span 3;
-  margin-top: -18px;
+  grid-column: 1 / span 4;
+  margin-top: 30px;
 }
 
 .polaroid:nth-child(7) {
-  grid-column: 1 / span 4;
-  margin-top: 4px;
+  grid-column: 5 / span 5;
+  margin-top: -15px;
 }
 
 .polaroid:nth-child(8) {
-  grid-column: 5 / span 4;
-  margin-top: -12px;
+  grid-column: 10 / span 3;
+  margin-top: 40px;
 }
 
 .polaroid:nth-child(9) {
-  grid-column: 9 / span 4;
-  margin-top: 8px;
+  grid-column: 3 / span 4;
+  margin-top: 20px;
 }
 
 .board-note {
@@ -1073,17 +1060,11 @@ img {
   bottom: 20px;
 }
 
-.about-section,
-.contact-section {
-  display: grid;
-  grid-template-columns: minmax(240px, 0.82fr) minmax(0, 1.18fr);
-  gap: clamp(34px, 5vw, 70px);
-  align-items: center;
-}
+.about-section, .contact-section { display: block; }
 
-.contact-section {
-  grid-template-columns: minmax(0, 1.18fr) minmax(240px, 0.82fr);
-  padding-top: clamp(52px, 7vw, 86px);
+.contact-section { 
+  display: block; 
+  padding-bottom: clamp(64px, 8vw, 100px); 
 }
 
 .about-section .section-header,
@@ -1123,9 +1104,10 @@ img {
   max-width: none;
 }
 
-.contact-single {
-  order: 1;
-  margin-left: 0;
+.contact-card {
+  width: min(100%, 440px);
+  justify-self: center;
+  margin: 0;
 }
 
 .about-card h3,
@@ -1282,17 +1264,7 @@ img {
 }
 
 .hero-section::before {
-  content: "";
-  width: min(520px, 44vw);
-  aspect-ratio: 1.14;
-  position: absolute;
-  right: 6%;
-  top: 13%;
-  z-index: -1;
-  opacity: 0.5;
-  transform: rotate(4deg);
-  background: url("/assets/generated-ui/hero-paper-desk-layer.png") center / contain no-repeat;
-  filter: drop-shadow(0 18px 28px rgba(49, 38, 26, 0.08));
+  display: none;
 }
 
 .hero-copy {
@@ -1479,24 +1451,14 @@ img {
   margin: 0;
 }
 
-.photo-board {
-  grid-template-columns: repeat(10, minmax(0, 1fr));
-  gap: 16px;
-  padding: clamp(20px, 3vw, 34px);
-  content-visibility: visible;
-}
+
 
 .polaroid {
   contain: layout paint;
   filter: drop-shadow(0 8px 14px rgba(49, 38, 26, 0.11));
 }
 
-.polaroid img,
-.polaroid .image-fallback {
-  aspect-ratio: 4 / 3.15;
-  object-fit: cover;
-  background: var(--paper-aged);
-}
+.polaroid img, .polaroid .image-fallback { width: 100%; height: auto; object-fit: contain; }
 
 .polaroid:nth-child(1) {
   grid-column: 1 / span 4;
@@ -1547,11 +1509,24 @@ img {
   display: block;
 }
 
-.about-dossier {
+.about-dossier, .contact-dossier {
   display: grid;
   grid-template-columns: minmax(240px, 0.75fr) minmax(0, 1.25fr);
   gap: clamp(28px, 5vw, 64px);
-  align-items: center;
+  align-items: start;
+}
+
+.contact-dossier {
+  width: min(760px, calc(100% - 40px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(24px, 4vw, 38px);
+  align-items: start;
+}
+
+.contact-dossier .section-header {
+  width: 100%;
 }
 
 .portrait-frame {
@@ -1569,8 +1544,8 @@ img {
   content: "";
   position: absolute;
   inset: 12px;
-  opacity: 0.28;
-  background: url("/assets/generated-ui/about-portrait-placeholder.png") center / contain no-repeat;
+  border: 1px dashed rgba(22, 18, 15, 0.18);
+  background: rgba(244, 237, 223, 0.4);
   pointer-events: none;
 }
 
@@ -1621,9 +1596,7 @@ img {
   margin-top: 26px;
 }
 
-.contact-section {
-  grid-template-columns: minmax(0, 1.05fr) minmax(250px, 0.95fr);
-}
+.contact-section { display: block; }
 
 .contact-card {
   background-image:
@@ -1689,10 +1662,7 @@ img {
     grid-template-columns: 1fr;
   }
 
-  .contact-section .section-header,
-  .contact-single {
-    order: initial;
-  }
+  
 
   .hero-section {
     padding-top: 64px;
@@ -1771,11 +1741,7 @@ img {
     transform: rotate(1deg);
   }
 
-  .photo-board {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 22px;
-    content-visibility: visible;
-  }
+  
 
   .polaroid,
   .polaroid:nth-child(n) {
@@ -1986,7 +1952,7 @@ img {
   position: relative;
   inset: auto;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(240px, 34%);
+  grid-template-columns: 1fr 380px;
   gap: clamp(24px, 4vw, 44px);
   align-items: start;
   overflow: hidden;
@@ -2000,13 +1966,7 @@ img {
     box-shadow 0.22s ease;
 }
 
-.project-scroll-card:nth-child(2) {
-  margin-left: clamp(0px, 3vw, 34px);
-}
 
-.project-scroll-card:nth-child(3) {
-  margin-right: clamp(0px, 3vw, 34px);
-}
 
 .project-scroll-card:hover {
   transform: translateY(-3px);
@@ -2046,9 +2006,12 @@ img {
   right: auto;
   bottom: auto;
   align-self: center;
-  padding: 10px;
-  transform: rotate(1.4deg);
-  overflow: hidden;
+  padding: 16px;
+  transform: rotate(0deg);
+  border: 1px solid rgba(22, 18, 15, 0.08);
+  border-radius: 6px;
+  background: var(--paper-bg-soft);
+  box-shadow: 0 4px 12px rgba(49, 38, 26, 0.04);
 }
 
 .project-scroll-shot {
@@ -2094,11 +2057,7 @@ img {
   bottom: 12px;
 }
 
-.photo-board {
-  grid-template-columns: repeat(10, minmax(0, 1fr));
-  gap: clamp(16px, 2vw, 24px);
-  padding: clamp(20px, 3vw, 34px);
-}
+
 
 .polaroid {
   padding: 0;
@@ -2184,4 +2143,918 @@ img {
     visibility: visible !important;
     transform: none !important;
   }
+}
+
+/* --- 03 Photos Layout Fix --- */
+.photo-board {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(18px, 2.2vw, 34px);
+  align-items: start;
+  width: min(1180px, calc(100vw - 80px));
+  max-width: 100%;
+  margin: 0 auto;
+  padding: clamp(32px, 5vw, 72px);
+  border: 1px solid var(--line-paper);
+  border-radius: 4px;
+  background-image:
+    linear-gradient(rgba(158, 133, 100, 0.22), rgba(158, 133, 100, 0.22)),
+    url("/assets/textures/kraft-clean.jpg");
+  background-size: auto, 640px auto;
+  background-repeat: repeat;
+  background-position: center;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.polaroid, .polaroid-featured {
+  position: relative;
+  overflow: visible;
+  background: transparent;
+  filter: drop-shadow(0 10px 18px rgba(49, 38, 26, 0.12));
+  contain: layout paint;
+  transition: transform 0.25s ease, filter 0.25s ease;
+  margin: 0 !important;
+  transform: rotate(var(--r, 0deg));
+}
+
+.polaroid:hover, .polaroid-featured:hover {
+  transform: translateY(-6px) scale(1.025);
+  filter: drop-shadow(0 14px 22px rgba(49, 38, 26, 0.15));
+}
+
+/* Distribution on 12-col grid */
+.polaroid:nth-child(1), .polaroid-featured { grid-column: span 4; margin-top: 14px !important; }
+.polaroid:nth-child(2) { grid-column: span 5; margin-top: 54px !important; }
+.polaroid:nth-child(3) { grid-column: span 3; margin-top: 10px !important; }
+.polaroid:nth-child(4) { grid-column: span 3; margin-top: 40px !important; }
+.polaroid:nth-child(5) { grid-column: span 4; margin-top: -10px !important; }
+.polaroid:nth-child(6) { grid-column: span 4; margin-top: 24px !important; }
+.polaroid:nth-child(7) { grid-column: span 4; margin-top: 20px !important; }
+.polaroid:nth-child(8) { grid-column: span 3; margin-top: 46px !important; }
+.polaroid:nth-child(9) { grid-column: span 5; margin-top: -5px !important; }
+
+@media (max-width: 900px) {
+  .photo-board {
+    width: calc(100% - 32px);
+    padding: clamp(24px, 4vw, 42px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+  }
+  .polaroid, .polaroid-featured {
+    grid-column: span 1 !important;
+    margin-top: 0 !important;
+  }
+}
+
+@media (max-width: 540px) {
+  .photo-board {
+    grid-template-columns: 1fr;
+    padding: 22px;
+  }
+}
+
+/* --- Targeted 03 Photos + 05 Contact Fix --- */
+.photos-section {
+  overflow: visible;
+}
+
+.photos-section > .section-header {
+  max-width: 1180px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.photo-board {
+  position: relative;
+  display: block;
+  width: min(95vw, 1360px);
+  max-width: none;
+  min-height: clamp(760px, 68vw, 920px);
+  margin: 0 50%;
+  padding: clamp(42px, 5vw, 78px);
+  overflow: visible;
+  transform: translateX(-50%);
+  border: 0;
+  border-radius: 4px;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(255, 255, 255, 0.13), transparent 32%),
+    radial-gradient(circle at 78% 82%, rgba(56, 42, 25, 0.10), transparent 36%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045), transparent 18%, rgba(0, 0, 0, 0.035) 52%, transparent 82%),
+    linear-gradient(rgba(123, 95, 65, 0.12), rgba(123, 95, 65, 0.12)),
+    url("/assets/textures/kraft-clean.jpg");
+  background-size:
+    auto,
+    auto,
+    100% 100%,
+    auto,
+    520px auto;
+  box-shadow:
+    0 34px 80px rgba(63, 48, 33, 0.20),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.14),
+    inset 0 0 80px rgba(56, 40, 25, 0.08);
+}
+
+.photo-board[data-reveal],
+.photo-board[data-reveal].is-visible {
+  transform: translateX(-50%);
+}
+
+.photo-board .polaroid,
+.photo-board .polaroid-featured {
+  position: absolute;
+  display: block;
+  padding: 0;
+  margin: 0 !important;
+  overflow: visible;
+  background: transparent;
+  box-shadow: 0 20px 38px rgba(54, 40, 25, 0.24);
+  filter: none;
+  contain: none;
+  transform: rotate(var(--r));
+}
+
+.photo-board .polaroid:hover,
+.photo-board .polaroid-featured:hover {
+  transform: rotate(var(--r)) translateY(-6px) scale(1.02);
+  filter: none;
+}
+
+.photo-board .polaroid::after,
+.photo-board .polaroid-featured::after {
+  display: none !important;
+}
+
+.photo-board .polaroid img,
+.photo-board .polaroid .image-fallback {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  overflow: visible;
+}
+
+.photo-board .polaroid-caption {
+  margin-top: 6px;
+}
+
+.photo-board .polaroid:nth-child(1) {
+  width: 28%;
+  left: 5%;
+  top: 7%;
+  transform: rotate(-4deg);
+}
+
+.photo-board .polaroid:nth-child(2) {
+  width: 35%;
+  left: 30%;
+  top: 5%;
+  transform: rotate(2deg);
+}
+
+.photo-board .polaroid:nth-child(3) {
+  width: 25%;
+  right: 5%;
+  top: 8%;
+  transform: rotate(-2deg);
+}
+
+.photo-board .polaroid:nth-child(4) {
+  width: 24%;
+  left: 10%;
+  top: 35%;
+  transform: rotate(3deg);
+}
+
+.photo-board .polaroid:nth-child(5) {
+  width: 31%;
+  left: 35%;
+  top: 31%;
+  transform: rotate(-2deg);
+}
+
+.photo-board .polaroid:nth-child(6) {
+  width: 27%;
+  right: 7%;
+  top: 36%;
+  transform: rotate(2.5deg);
+}
+
+.photo-board .polaroid:nth-child(7) {
+  width: 24%;
+  left: 7%;
+  top: 48%;
+  transform: rotate(-3deg);
+}
+
+.photo-board .polaroid:nth-child(8) {
+  width: 24%;
+  left: 39%;
+  top: 66%;
+  transform: rotate(2deg);
+}
+
+.photo-board .polaroid:nth-child(9) {
+  width: 24%;
+  right: 5%;
+  top: 48%;
+  transform: rotate(-1.5deg);
+}
+
+.contact-section {
+  padding-top: clamp(72px, 10vw, 120px);
+  padding-bottom: clamp(90px, 12vw, 150px);
+}
+
+.contact-dossier {
+  width: min(620px, calc(100% - 40px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 22px;
+  column-gap: 0;
+  align-items: start;
+  justify-items: stretch;
+}
+
+.contact-dossier .section-header {
+  width: 100%;
+  margin: 0;
+  order: initial;
+}
+
+.contact-card,
+.contact-single {
+  width: 100%;
+  max-width: none;
+  justify-self: stretch;
+  margin: 0;
+  transform: none;
+}
+
+@media (max-width: 760px) {
+  .photo-board {
+    position: static;
+    width: min(100%, calc(100vw - 28px));
+    min-height: 0;
+    margin: 0 auto;
+    padding: 22px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    transform: none;
+  }
+
+  .photo-board[data-reveal],
+  .photo-board[data-reveal].is-visible {
+    transform: none !important;
+  }
+
+  .photo-board .polaroid,
+  .photo-board .polaroid-featured {
+    position: static;
+    width: 100% !important;
+    transform: rotate(var(--r));
+  }
+
+  .photo-board .polaroid:hover,
+  .photo-board .polaroid-featured:hover {
+    transform: rotate(var(--r));
+  }
+}
+
+@media (max-width: 480px) {
+  .photo-board {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- 03/05 Refinement: lighter overlap, wider contact card --- */
+.photo-board .polaroid:nth-child(1) {
+  width: 24%;
+  left: 5%;
+  top: 8%;
+  transform: rotate(-3deg);
+}
+
+.photo-board .polaroid:nth-child(2) {
+  width: 30%;
+  left: 35%;
+  top: 6%;
+  transform: rotate(2deg);
+}
+
+.photo-board .polaroid:nth-child(3) {
+  width: 22%;
+  right: 6%;
+  top: 8%;
+  transform: rotate(-2deg);
+}
+
+.photo-board .polaroid:nth-child(4) {
+  width: 21%;
+  left: 18%;
+  top: 36%;
+  transform: rotate(2.5deg);
+}
+
+.photo-board .polaroid:nth-child(5) {
+  width: 28%;
+  left: 39%;
+  top: 35%;
+  transform: rotate(-1.8deg);
+}
+
+.photo-board .polaroid:nth-child(6) {
+  width: 21%;
+  right: 18%;
+  top: 39%;
+  transform: rotate(2.2deg);
+}
+
+.photo-board .polaroid:nth-child(7) {
+  width: 20%;
+  left: 5%;
+  top: 57%;
+  transform: rotate(-2.5deg);
+}
+
+.photo-board .polaroid:nth-child(8) {
+  width: 23%;
+  left: 38%;
+  top: 66%;
+  transform: rotate(1.8deg);
+}
+
+.photo-board .polaroid:nth-child(9) {
+  width: 20%;
+  right: 5%;
+  top: 57%;
+  transform: rotate(-1.3deg);
+}
+
+.contact-dossier {
+  width: min(760px, calc(100% - 40px));
+}
+
+.contact-card,
+.contact-single {
+  width: 100%;
+}
+
+.contact-card {
+  padding: clamp(40px, 5vw, 66px);
+}
+
+.contact-card h3 {
+  margin-bottom: 32px;
+}
+
+.contact-line {
+  width: 100%;
+}
+
+.copy-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(180px, 1fr));
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.copy-row button {
+  width: 100%;
+}
+
+@media (max-width: 760px) {
+  .copy-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- 03/05 Final Tightening --- */
+.photo-board .polaroid:nth-child(1) {
+  width: 24%;
+  left: 5%;
+  top: 8%;
+  transform: rotate(-3deg);
+}
+
+.photo-board .polaroid:nth-child(2) {
+  width: 30%;
+  left: 35%;
+  top: 6%;
+  transform: rotate(2deg);
+}
+
+.photo-board .polaroid:nth-child(3) {
+  width: 22%;
+  right: 6%;
+  top: 8%;
+  transform: rotate(-2deg);
+}
+
+.photo-board .polaroid:nth-child(4) {
+  width: 18%;
+  left: 22%;
+  top: 38%;
+  transform: rotate(2.5deg);
+}
+
+.photo-board .polaroid:nth-child(5) {
+  width: 26%;
+  left: 36%;
+  top: 42%;
+  transform: rotate(-1.8deg);
+}
+
+.photo-board .polaroid:nth-child(6) {
+  width: 18%;
+  right: 24%;
+  top: 49%;
+  transform: rotate(2.2deg);
+}
+
+.photo-board .polaroid:nth-child(7) {
+  width: 17%;
+  left: 7%;
+  top: 58%;
+  transform: rotate(-2.5deg);
+}
+
+.photo-board .polaroid:nth-child(8) {
+  width: 22%;
+  left: 39%;
+  top: 67%;
+  transform: rotate(1.8deg);
+}
+
+.photo-board .polaroid:nth-child(9) {
+  width: 17%;
+  right: 5%;
+  top: 58%;
+  transform: rotate(-1.3deg);
+}
+
+.contact-dossier {
+  width: min(820px, calc(100% - 40px));
+}
+
+.contact-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.72fr);
+  column-gap: clamp(28px, 4vw, 44px);
+  row-gap: 14px;
+  align-items: start;
+  padding: clamp(42px, 5vw, 68px);
+}
+
+.contact-card h3,
+.contact-line.primary,
+.contact-card .hand-note,
+.copy-status {
+  grid-column: 1 / -1;
+}
+
+.contact-card h3 {
+  margin-bottom: 18px;
+}
+
+.contact-line {
+  grid-column: 1;
+}
+
+.copy-row {
+  grid-column: 2;
+  grid-row: 3 / span 3;
+  grid-template-columns: 1fr;
+  align-self: start;
+  margin-top: 0;
+}
+
+@media (max-width: 760px) {
+  .contact-card {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-line,
+  .copy-row {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .copy-row {
+    margin-top: 16px;
+  }
+}
+
+/* --- 03/04/05 final layout constraints --- */
+.photo-board .polaroid-caption {
+  display: none;
+}
+
+.photo-board .polaroid:nth-child(1) {
+  width: 22%;
+  left: 5%;
+  top: 8%;
+  transform: rotate(-2.5deg);
+}
+
+.photo-board .polaroid:nth-child(2) {
+  width: 28%;
+  left: 36%;
+  top: 6%;
+  transform: rotate(1.8deg);
+}
+
+.photo-board .polaroid:nth-child(3) {
+  width: 20%;
+  right: 6%;
+  top: 8%;
+  transform: rotate(-1.8deg);
+}
+
+.photo-board .polaroid:nth-child(4) {
+  width: 17%;
+  left: 8%;
+  top: 41%;
+  transform: rotate(2deg);
+}
+
+.photo-board .polaroid:nth-child(5) {
+  width: 24%;
+  left: 36%;
+  top: 42%;
+  transform: rotate(-1.6deg);
+}
+
+.photo-board .polaroid:nth-child(6) {
+  width: 14%;
+  right: 22%;
+  top: 48%;
+  transform: rotate(2deg);
+}
+
+.photo-board .polaroid:nth-child(7) {
+  width: 16%;
+  left: 5%;
+  top: 66%;
+  transform: rotate(-2deg);
+}
+
+.photo-board .polaroid:nth-child(8) {
+  width: 20%;
+  left: 39%;
+  top: 70%;
+  transform: rotate(1.6deg);
+}
+
+.photo-board .polaroid:nth-child(9) {
+  width: 16%;
+  right: 5%;
+  top: 64%;
+  transform: rotate(-1.2deg);
+}
+
+.about-dossier {
+  align-items: stretch;
+}
+
+.portrait-frame {
+  min-height: 410px;
+  height: 100%;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.portrait-img,
+.portrait-frame .image-fallback {
+  height: 100%;
+  min-height: 0;
+  aspect-ratio: auto;
+  object-fit: cover;
+}
+
+.about-card {
+  height: 100%;
+}
+
+.contact-dossier {
+  width: min(1040px, calc(100% - 40px));
+  grid-template-columns: minmax(240px, 0.78fr) minmax(0, 1.22fr);
+  column-gap: clamp(36px, 5vw, 72px);
+  row-gap: 0;
+  align-items: start;
+}
+
+.contact-dossier .section-header {
+  align-self: start;
+}
+
+.contact-card,
+.contact-single {
+  width: 100%;
+  max-width: none;
+  justify-self: stretch;
+  margin: 0;
+  transform: none;
+}
+
+@media (max-width: 760px) {
+  .contact-dossier {
+    width: min(620px, calc(100% - 40px));
+    grid-template-columns: 1fr;
+    row-gap: 22px;
+  }
+}
+
+/* --- 03/05 strict correction: no photo overlap, left-title/right-card contact --- */
+.photo-board .polaroid {
+  box-shadow: 0 18px 32px rgba(54, 40, 25, 0.22);
+}
+
+.photo-board .polaroid:hover {
+  transform: rotate(var(--r));
+}
+
+.photo-board .polaroid:nth-child(1) {
+  width: 21%;
+  left: 5%;
+  top: 7%;
+  transform: rotate(-1.5deg);
+}
+
+.photo-board .polaroid:nth-child(2) {
+  width: 26%;
+  left: 36%;
+  top: 7%;
+  transform: rotate(1.2deg);
+}
+
+.photo-board .polaroid:nth-child(3) {
+  width: 17%;
+  right: 6%;
+  top: 7%;
+  transform: rotate(-1.2deg);
+}
+
+.photo-board .polaroid:nth-child(4) {
+  width: 15%;
+  left: 8%;
+  top: 41%;
+  transform: rotate(1.4deg);
+}
+
+.photo-board .polaroid:nth-child(5) {
+  width: 23%;
+  left: 36%;
+  top: 42%;
+  transform: rotate(-1.1deg);
+}
+
+.photo-board .polaroid:nth-child(6) {
+  width: 13.5%;
+  right: 16%;
+  top: 45%;
+  transform: rotate(1.3deg);
+}
+
+.photo-board .polaroid:nth-child(7) {
+  width: 13%;
+  left: 6%;
+  top: 72%;
+  transform: rotate(-1.3deg);
+}
+
+.photo-board .polaroid:nth-child(8) {
+  width: 19%;
+  left: 39%;
+  top: 71%;
+  transform: rotate(1.1deg);
+}
+
+.photo-board .polaroid:nth-child(9) {
+  width: 13%;
+  right: 5%;
+  top: 73%;
+  transform: rotate(-1deg);
+}
+
+.contact-dossier {
+  width: min(1180px, calc(100% - 48px));
+  grid-template-columns: 320px minmax(640px, 760px);
+  column-gap: clamp(48px, 6vw, 86px);
+  justify-content: center;
+  align-items: start;
+}
+
+.contact-dossier .section-header {
+  width: 100%;
+  max-width: 320px;
+  justify-self: start;
+}
+
+.contact-card {
+  display: block;
+  width: 100%;
+  max-width: none;
+  min-height: 360px;
+  padding: clamp(44px, 4.5vw, 60px);
+}
+
+.contact-card h3,
+.contact-line,
+.copy-row,
+.contact-card .hand-note,
+.copy-status {
+  grid-column: auto;
+  grid-row: auto;
+}
+
+.contact-card h3 {
+  margin-bottom: 24px;
+}
+
+.copy-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 28px;
+}
+
+@media (max-width: 1040px) {
+  .contact-dossier {
+    grid-template-columns: 280px minmax(0, 1fr);
+    column-gap: 42px;
+  }
+}
+
+@media (max-width: 760px) {
+  .contact-dossier {
+    width: min(620px, calc(100% - 40px));
+    grid-template-columns: 1fr;
+    row-gap: 22px;
+  }
+
+  .contact-dossier .section-header {
+    max-width: none;
+  }
+
+  .copy-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- 05 full-width closing card surface --- */
+.contact-section {
+  max-width: none;
+  width: 100%;
+  margin: 0;
+  padding: clamp(62px, 7vw, 92px) 0 clamp(70px, 8vw, 108px);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.24), transparent 18%),
+    repeating-linear-gradient(0deg, transparent 0 48px, rgba(92, 72, 48, 0.10) 49px 50px),
+    radial-gradient(circle at 18% 88%, rgba(111, 89, 67, 0.08), transparent 28%),
+    radial-gradient(circle at 82% 12%, rgba(255, 255, 255, 0.16), transparent 32%),
+    linear-gradient(var(--paper-card), var(--paper-card));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.38),
+    inset 0 -1px 0 rgba(78, 61, 39, 0.08),
+    0 -18px 44px rgba(54, 40, 25, 0.08);
+}
+
+.contact-dossier {
+  width: min(1180px, calc(100vw - 56px));
+  grid-template-columns: minmax(260px, 340px) minmax(0, 720px);
+  column-gap: clamp(54px, 7vw, 104px);
+  justify-content: center;
+  align-items: start;
+}
+
+.contact-card,
+.contact-single {
+  min-height: 0;
+  padding: 0;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.contact-card::before,
+.contact-card::after {
+  display: none;
+}
+
+.contact-card h3 {
+  margin-bottom: 14px;
+  font-size: clamp(34px, 4vw, 42px);
+}
+
+.contact-line {
+  padding: 10px 0;
+}
+
+.contact-line.primary {
+  font-size: clamp(19px, 2vw, 22px);
+}
+
+.copy-row {
+  margin-top: 20px;
+}
+
+.contact-card .hand-note {
+  margin-top: 18px;
+}
+
+@media (max-width: 760px) {
+  .contact-section {
+    padding: 56px 0 72px;
+  }
+
+  .contact-dossier {
+    width: min(620px, calc(100vw - 40px));
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+  }
+}
+
+/* --- 03/05 final polish: larger staggered photos, no contact rule lines --- */
+.photo-board {
+  min-height: clamp(980px, 80vw, 1120px);
+}
+
+.photo-board .polaroid:nth-child(1) {
+  width: 24%;
+  left: 5%;
+  top: 7%;
+  transform: rotate(-2.2deg);
+}
+
+.photo-board .polaroid:nth-child(2) {
+  width: 29%;
+  left: 35%;
+  top: 5%;
+  transform: rotate(1.4deg);
+}
+
+.photo-board .polaroid:nth-child(3) {
+  width: 19%;
+  right: 5%;
+  top: 7%;
+  transform: rotate(-1.5deg);
+}
+
+.photo-board .polaroid:nth-child(4) {
+  width: 17%;
+  left: 8%;
+  top: 40%;
+  transform: rotate(1.6deg);
+}
+
+.photo-board .polaroid:nth-child(5) {
+  width: 26%;
+  left: 36%;
+  top: 37%;
+  transform: rotate(-1.2deg);
+}
+
+.photo-board .polaroid:nth-child(6) {
+  width: 16%;
+  right: 12%;
+  top: 43%;
+  transform: rotate(1.4deg);
+}
+
+.photo-board .polaroid:nth-child(7) {
+  width: 17%;
+  left: 6%;
+  top: 71%;
+  transform: rotate(-1.5deg);
+}
+
+.photo-board .polaroid:nth-child(8) {
+  width: 24%;
+  left: 38%;
+  top: 72%;
+  transform: rotate(1.2deg);
+}
+
+.photo-board .polaroid:nth-child(9) {
+  width: 16%;
+  right: 5%;
+  top: 72%;
+  transform: rotate(-1.2deg);
+}
+
+.contact-section {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.24), transparent 18%),
+    radial-gradient(circle at 18% 88%, rgba(111, 89, 67, 0.08), transparent 28%),
+    radial-gradient(circle at 82% 12%, rgba(255, 255, 255, 0.16), transparent 32%),
+    linear-gradient(var(--paper-card), var(--paper-card));
+  box-shadow: 0 -18px 44px rgba(54, 40, 25, 0.08);
+}
+
+.contact-line {
+  border-bottom: 0;
 }
